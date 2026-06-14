@@ -358,7 +358,7 @@
 
   applyI18n(I18N);
 
-  // 邮箱：base64 存放避爬虫，点击时解码为 mailto
+  // 邮箱：base64 编码，点击解码为 mailto
   const emailLink = document.getElementById("email-link");
   const email = atob(emailLink.dataset.email);
   emailLink.addEventListener("click", function (e) {
