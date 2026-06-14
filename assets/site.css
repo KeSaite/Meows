@@ -24,3 +24,8 @@ body {
 }
 a { color: var(--primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
+
+/* 深色模式：纯黑 logo 反相为白，保证深色背景下可见 */
+@media (prefers-color-scheme: dark) {
+  .brand img, .back img { filter: invert(1); }
+}
