@@ -1,0 +1,26 @@
+/* Meows 站点共享基础：暖色主题（随系统自动暗/亮，无按钮）+ 字体 + 链接 */
+:root {
+  --bg: #FBF7F2; --surface: #FFFFFF; --surface-2: #F3ECE3;
+  --text: #2B2722; --muted: #877E73; --border: #EBE3D8;
+  --primary: #B25C25; --primary-weak: #F3E2D2; --on-primary: #FFFFFF;
+  --shadow: 0 1px 2px rgba(60,40,20,.06), 0 8px 28px rgba(60,40,20,.08);
+  --radius: 20px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141210; --surface: #1E1B17; --surface-2: #29241E;
+    --text: #EFE9E1; --muted: #A99E90; --border: #332C24;
+    --primary: #E0975A; --primary-weak: #2E2118; --on-primary: #20150C;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Noto Sans CJK SC",
+    "PingFang SC", "Microsoft YaHei", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.65;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
