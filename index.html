@@ -6,6 +6,7 @@
 <title>Meows</title>
 <meta name="description" content="Native Android SSH server monitoring. Add an IP, monitor your VPS — nothing installed on the server. Terminal, Docker, network tools. Encrypted on-device, one permission, no telemetry.">
 <link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <meta name="google-site-verification" content="b_yXVIve3Viz64DMB6fFqK7dbHA58nTjf6VMWfUXWis">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="canonical" href="https://app.kvitra.com/">
@@ -15,7 +16,7 @@
 <meta property="og:title" content="Meows — SSH server monitoring for Android">
 <meta property="og:description" content="Monitor your servers over plain SSH. Nothing installed server-side. Terminal · Docker · network tools. Private by design.">
 <meta property="og:url" content="https://app.kvitra.com/">
-<meta property="og:image" content="https://app.kvitra.com/assets/dashboard.png">
+<meta property="og:image" content="https://app.kvitra.com/assets/dashboard.webp">
 <style>
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
@@ -93,10 +94,7 @@
 
   /* 页脚 */
   footer { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 14px; }
-  .foot { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
-  .foot .spacer { flex: 1; }
-  .foot .brand { font-size: 16px; }
-  .foot .brand img { width: 22px; height: 22px; }
+  .foot { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: center; }
 
   /* 响应式 */
   @media (max-width: 860px) {
@@ -140,7 +138,7 @@
         <span class="price"><b data-i18n="cta_price">$4.99</b> · <span data-i18n="cta_sub">one-time, no subscription</span></span>
       </div>
     </div>
-    <div class="hero-shot"><img src="assets/dashboard.png" alt="Meows dashboard" fetchpriority="high"></div>
+    <div class="hero-shot"><img src="assets/dashboard.webp" alt="Meows dashboard" fetchpriority="high"></div>
   </section>
 
   <section class="wrap block">
@@ -185,10 +183,10 @@
     <span class="eyebrow" data-i18n="shots_eyebrow">A look inside</span>
     <h2 class="title" data-i18n="shots_title">Built natively, polished by hand</h2>
     <div class="gallery">
-      <figure><img src="assets/terminal.png" alt="Editing code in the terminal" loading="lazy"><figcaption data-i18n="shot_terminal">Editing code in the terminal</figcaption></figure>
-      <figure><img src="assets/docker.png" alt="Docker container management" loading="lazy"><figcaption data-i18n="shot_docker">Docker container management</figcaption></figure>
-      <figure><img src="assets/charts.png" alt="History charts" loading="lazy"><figcaption data-i18n="shot_charts">History charts with process detail</figcaption></figure>
-      <figure><img src="assets/tools.png" alt="Network and developer tools" loading="lazy"><figcaption data-i18n="shot_tools">A pocketful of network &amp; dev tools</figcaption></figure>
+      <figure><img src="assets/terminal.webp" alt="Editing code in the terminal" loading="lazy"><figcaption data-i18n="shot_terminal">Editing code in the terminal</figcaption></figure>
+      <figure><img src="assets/docker.webp" alt="Docker container management" loading="lazy"><figcaption data-i18n="shot_docker">Docker container management</figcaption></figure>
+      <figure><img src="assets/charts.webp" alt="History charts" loading="lazy"><figcaption data-i18n="shot_charts">History charts with process detail</figcaption></figure>
+      <figure><img src="assets/tools.webp" alt="Network and developer tools" loading="lazy"><figcaption data-i18n="shot_tools">A pocketful of network &amp; dev tools</figcaption></figure>
     </div>
   </section>
 
@@ -248,15 +246,13 @@
     </div>
     <p class="meta">
       <span data-i18n="dl_req">Android 14+ · English / 简体中文 / 繁體中文 / 日本語 / 한국어</span><br>
-      <span data-i18n="dl_regions">Available in: US · UK · Canada · Japan · Singapore · South Korea · Hong Kong · Taiwan · Macau · Malaysia · Iceland</span>
+      <span data-i18n="dl_regions">Available in: US · UK · Canada · Germany · France · Netherlands · Iceland · Japan · South Korea · Singapore · Malaysia · Australia · Hong Kong · Taiwan · Macau</span>
     </p>
   </section>
 </main>
 
 <footer>
   <div class="wrap foot">
-    <span class="brand"><img src="favicon.png" alt="">Meows</span>
-    <span class="spacer"></span>
     <a href="privacy/" data-i18n="foot_privacy">Privacy Policy</a>
     <span data-i18n="foot_rights">© 2026 Li Bainan. All rights reserved.</span>
   </div>
@@ -305,7 +301,7 @@
       dl_eyebrow: "Download", dl_title: "One-time purchase. Free updates.",
       dl_lead: "Buy it once, use it for good — no subscription, no in-app purchases, no ads. Google Play refunds within 2 hours, so try it risk-free.",
       dl_req: "Android 14+ · English / 简体中文 / 繁體中文 / 日本語 / 한국어",
-      dl_regions: "Available in: US · UK · Canada · Japan · Singapore · South Korea · Hong Kong · Taiwan · Macau · Malaysia · Iceland",
+      dl_regions: "Available in: US · UK · Canada · Germany · France · Netherlands · Iceland · Japan · South Korea · Singapore · Malaysia · Australia · Hong Kong · Taiwan · Macau",
       foot_privacy: "Privacy Policy", foot_rights: "© 2026 Li Bainan. All rights reserved."
     },
     zhCN: {
@@ -347,7 +343,7 @@
       dl_eyebrow: "下载", dl_title: "一次买断，更新免费",
       dl_lead: "买断一次，长久使用——无订阅、无内购、无广告。Google Play 两小时内可无理由退款，放心试。",
       dl_req: "Android 14+ · 英文 / 简体中文 / 繁体中文 / 日语 / 韩语",
-      dl_regions: "上架地区：美国 · 英国 · 加拿大 · 日本 · 新加坡 · 韩国 · 香港 · 台湾 · 澳门 · 马来西亚 · 冰岛",
+      dl_regions: "上架地区：美国 · 英国 · 加拿大 · 德国 · 法国 · 荷兰 · 冰岛 · 日本 · 韩国 · 新加坡 · 马来西亚 · 澳大利亚 · 香港 · 台湾 · 澳门",
       foot_privacy: "隐私政策", foot_rights: "© 2026 Li Bainan 版权所有"
     },
     zhTW: {
@@ -389,7 +385,7 @@
       dl_eyebrow: "下載", dl_title: "一次買斷，更新免費",
       dl_lead: "買斷一次，長久使用——無訂閱、無內購、無廣告。Google Play 兩小時內可無理由退款，放心試。",
       dl_req: "Android 14+ · 英文 / 簡體中文 / 繁體中文 / 日語 / 韓語",
-      dl_regions: "上架地區：美國 · 英國 · 加拿大 · 日本 · 新加坡 · 韓國 · 香港 · 台灣 · 澳門 · 馬來西亞 · 冰島",
+      dl_regions: "上架地區：美國 · 英國 · 加拿大 · 德國 · 法國 · 荷蘭 · 冰島 · 日本 · 韓國 · 新加坡 · 馬來西亞 · 澳洲 · 香港 · 台灣 · 澳門",
       foot_privacy: "隱私權政策", foot_rights: "© 2026 Li Bainan 版權所有"
     },
     ja: {
@@ -431,7 +427,7 @@
       dl_eyebrow: "ダウンロード", dl_title: "買い切り、アップデート無料",
       dl_lead: "一度購入すればずっと使えます——サブスクも、アプリ内課金も、広告もなし。Google Play は 2 時間以内なら返金可能、気軽にお試しを。",
       dl_req: "Android 14+ · 英語 / 簡体字中国語 / 繁体字中国語 / 日本語 / 韓国語",
-      dl_regions: "提供地域：米国 · 英国 · カナダ · 日本 · シンガポール · 韓国 · 香港 · 台湾 · マカオ · マレーシア · アイスランド",
+      dl_regions: "提供地域：米国 · 英国 · カナダ · ドイツ · フランス · オランダ · アイスランド · 日本 · 韓国 · シンガポール · マレーシア · オーストラリア · 香港 · 台湾 · マカオ",
       foot_privacy: "プライバシーポリシー", foot_rights: "© 2026 Li Bainan All rights reserved."
     },
     ko: {
@@ -473,7 +469,7 @@
       dl_eyebrow: "다운로드", dl_title: "한 번 구매, 업데이트 무료",
       dl_lead: "한 번 사면 계속 사용——구독도, 인앱 결제도, 광고도 없습니다. Google Play는 2시간 내 환불이 가능하니 부담 없이 사용해 보세요.",
       dl_req: "Android 14+ · 영어 / 중국어 간체 / 중국어 번체 / 일본어 / 한국어",
-      dl_regions: "출시 지역: 미국 · 영국 · 캐나다 · 일본 · 싱가포르 · 한국 · 홍콩 · 대만 · 마카오 · 말레이시아 · 아이슬란드",
+      dl_regions: "출시 지역: 미국 · 영국 · 캐나다 · 독일 · 프랑스 · 네덜란드 · 아이슬란드 · 일본 · 한국 · 싱가포르 · 말레이시아 · 호주 · 홍콩 · 대만 · 마카오",
       foot_privacy: "개인정보 처리방침", foot_rights: "© 2026 Li Bainan. All rights reserved."
     }
   };
