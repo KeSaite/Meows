@@ -358,14 +358,14 @@
 
   applyI18n(I18N);
 
-  // 邮箱：base64 编码，点击解码为 mailto
+  // 邮箱：base64 编码防爬；首次点击解码显示地址，之后即为正常的 mailto 链接（再点即打开邮件应用）
   const emailLink = document.getElementById("email-link");
   const email = atob(emailLink.dataset.email);
   emailLink.addEventListener("click", function (e) {
     e.preventDefault();
     emailLink.href = "mailto:" + email;
     emailLink.textContent = email;
-  });
+  }, { once: true });
 </script>
 </body>
 </html>
