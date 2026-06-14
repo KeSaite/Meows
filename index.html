@@ -27,7 +27,7 @@
     border-bottom: 1px solid var(--border); }
   .nav { display: flex; align-items: center; height: 64px; }
   .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; letter-spacing: -.01em; }
-  .brand img { width: 30px; height: 30px; border-radius: 8px; }
+  .brand img { width: 30px; height: 30px; }
 
   /* 首屏 */
   .hero { padding: 72px 0 40px; display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; }
@@ -43,8 +43,7 @@
   .price { font-size: 14px; color: var(--muted); }
   .price b { color: var(--text); }
   .hero-shot { display: flex; justify-content: center; }
-  .hero-shot img { width: 100%; max-width: 300px; border-radius: 28px;
-    box-shadow: var(--shadow); border: 1px solid var(--border); }
+  .hero-shot img { width: 100%; max-width: 300px; }
 
   /* 区块通用 */
   section.block { padding: 56px 0; }
@@ -64,9 +63,9 @@
 
   /* 截图画廊 */
   .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-  .gallery figure { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 16px; box-shadow: var(--shadow); }
-  .gallery img { width: 100%; border-radius: 12px; display: block; border: 1px solid var(--border); }
+  .gallery img { width: 100%; display: block; }
+  /* 截图：手机 mockup 投影（gallery 与 hero 一致）*/
+  .gallery img, .hero-shot img { filter: drop-shadow(0 10px 30px rgba(0, 0, 0, .2)); }
   .gallery figcaption { font-size: 13px; color: var(--muted); margin-top: 12px; text-align: center; }
 
   /* 信任条 */
@@ -260,7 +259,7 @@
 
 <script src="assets/i18n.js"></script>
 <script>
-  // 5 语言文案字典 + 按系统语言自动应用
+  // 5 语言文案字典，按系统语言自动应用
   const I18N = {
     en: {
       hero_badge: "Android 14+",

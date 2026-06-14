@@ -1,4 +1,4 @@
-/* Meows 站点共享基础：暖色主题（随系统自动暗/亮，无按钮）+ 字体 + 链接 */
+/* Meows 站点共享基础：暖色主题（随系统自动暗/亮，无按钮）、字体、链接 */
 :root {
   --bg: #FBF7F2; --surface: #FFFFFF; --surface-2: #F3ECE3;
   --text: #2B2722; --muted: #877E73; --border: #EBE3D8;
@@ -25,7 +25,8 @@ body {
 a { color: var(--primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* 深色模式：纯黑 logo 反相为白，保证深色背景下可见 */
+/* logo 金色圆环（暗色模式微微发光衬托深色背景）*/
+.brand img, .back img { border-radius: 50%; border: 1px solid #D4AF37; padding: 2px; }
 @media (prefers-color-scheme: dark) {
-  .brand img, .back img { filter: invert(1); }
+  .brand img, .back img { box-shadow: 0 0 8px rgba(212, 175, 55, .55); }
 }
