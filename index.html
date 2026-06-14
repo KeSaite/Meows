@@ -39,7 +39,7 @@
   .store { display: inline-flex; align-items: center; gap: 10px; background: var(--primary); color: var(--on-primary);
     padding: 13px 22px; border-radius: 14px; font-weight: 700; box-shadow: var(--shadow); }
   .store:hover { text-decoration: none; transform: translateY(-1px); }
-  .store svg { width: 20px; height: 20px; fill: currentColor; }
+  .store svg { width: 22px; height: 22px; }
   .price { font-size: 14px; color: var(--muted); }
   .price b { color: var(--text); }
   .hero-shot { display: flex; justify-content: center; }
@@ -114,7 +114,12 @@
 <body>
 <!-- Google Play 图标：首屏与下载区共用 -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="gplay" viewBox="0 0 512 512"><path d="M48 59.5v393c0 6 3.3 11.4 8.6 14.1L283 256 56.6 45.4A15.9 15.9 0 0 0 48 59.5zM361 195.5l-58.4-33.7L92.4 28.2 339 274.7zM361 316.5L339 237.3 92.4 483.8l210.2-122zM464.4 232.5l-71.9-41.5-69 65 69 65 71.9-41.5c15.4-9 15.4-31.5 0-40z"/></symbol>
+  <symbol id="gplay" viewBox="0 0 512 512">
+    <path fill="#00C3FF" d="M48 59.5v393c0 6 3.3 11.4 8.6 14.1L283 256 56.6 45.4A15.9 15.9 0 0 0 48 59.5z"/>
+    <path fill="#00E676" d="M361 195.5l-58.4-33.7L92.4 28.2 339 274.7z"/>
+    <path fill="#FF424D" d="M361 316.5L339 237.3 92.4 483.8l210.2-122z"/>
+    <path fill="#FFCE00" d="M464.4 232.5l-71.9-41.5-69 65 69 65 71.9-41.5c15.4-9 15.4-31.5 0-40z"/>
+  </symbol>
 </svg>
 
 <header>
