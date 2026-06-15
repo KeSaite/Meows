@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meows</title>
-<meta name="description" content="Native Android SSH server monitoring. Add an IP, monitor your VPS, with nothing installed on the server. Terminal, Docker, network tools. Encrypted on-device, one permission, no telemetry.">
+<meta name="description" content="Native Android SSH server monitoring. Add an IP, monitor your VPS. Nothing installed on the server. Terminal, Docker, network tools. Encrypted on-device, one permission, no telemetry.">
 <link rel="icon" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <meta name="google-site-verification" content="b_yXVIve3Viz64DMB6fFqK7dbHA58nTjf6VMWfUXWis">
@@ -36,10 +36,9 @@
   .hero h1 { font-size: clamp(34px, 5vw, 52px); line-height: 1.1; letter-spacing: -.02em; font-weight: 800; }
   .hero .sub { font-size: clamp(16px, 2vw, 19px); color: var(--muted); margin: 18px 0 30px; max-width: 30em; }
   .cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-  .store { display: inline-flex; align-items: center; gap: 10px; background: var(--primary); color: var(--on-primary);
-    padding: 13px 22px; border-radius: 14px; font-weight: 700; box-shadow: var(--shadow); }
-  .store:hover { text-decoration: none; transform: translateY(-1px); }
-  .store svg { width: 22px; height: 22px; }
+  .store { display: inline-flex; }
+  .store:hover { transform: translateY(-1px); }
+  .store img { height: 58px; width: auto; display: block; aspect-ratio: 239 / 71; }
   .price { font-size: 14px; color: var(--muted); }
   .price b { color: var(--text); }
   .hero-shot { display: flex; justify-content: center; }
@@ -112,15 +111,6 @@
 </style>
 </head>
 <body>
-<!-- Google Play 图标：首屏与下载区共用 -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="gplay" viewBox="0 0 512 512">
-    <path fill="#00C3FF" d="M48 59.5v393c0 6 3.3 11.4 8.6 14.1L283 256 56.6 45.4A15.9 15.9 0 0 0 48 59.5z"/>
-    <path fill="#00E676" d="M361 195.5l-58.4-33.7L92.4 28.2 339 274.7z"/>
-    <path fill="#FF424D" d="M361 316.5L339 237.3 92.4 483.8l210.2-122z"/>
-    <path fill="#FFCE00" d="M464.4 232.5l-71.9-41.5-69 65 69 65 71.9-41.5c15.4-9 15.4-31.5 0-40z"/>
-  </symbol>
-</svg>
 
 <header>
   <div class="wrap nav">
@@ -136,8 +126,7 @@
       <p class="sub" data-i18n="hero_sub">Native Android SSH monitoring. Fill in an IP and you are watching your VPS. Nothing installed on the server.</p>
       <div class="cta">
         <a class="store" href="https://play.google.com/store/apps/details?id=com.meows.android">
-          <svg aria-hidden="true"><use href="#gplay"/></svg>
-          <span data-i18n="cta_get">Get it on Google Play</span>
+          <img data-i18n-src="cta_badge" data-i18n-alt="cta_get" src="assets/playbadge/en.svg" alt="Get it on Google Play">
         </a>
         <span class="price"><b data-i18n="cta_price">$4.99</b> · <span data-i18n="cta_sub">one-time, no subscription</span></span>
       </div>
@@ -244,8 +233,7 @@
     <p class="lead" data-i18n="dl_lead">Buy it once, use it for good. No subscription, no in-app purchases, no ads. Google Play refunds within 2 hours, so try it risk-free.</p>
     <div class="cta">
       <a class="store" href="https://play.google.com/store/apps/details?id=com.meows.android">
-        <svg aria-hidden="true"><use href="#gplay"/></svg>
-        <span data-i18n="cta_get">Get it on Google Play</span>
+        <img data-i18n-src="cta_badge" data-i18n-alt="cta_get" src="assets/playbadge/en.svg" alt="Get it on Google Play">
       </a>
     </div>
     <p class="meta">
@@ -270,7 +258,7 @@
       hero_badge: "Android 14+",
       hero_title: "Your servers, in your pocket.",
       hero_sub: "Native Android SSH monitoring. Fill in an IP and you are watching your VPS. Nothing installed on the server.",
-      cta_get: "Get it on Google Play", cta_price: "$4.99", cta_sub: "one-time, no subscription",
+      cta_get: "Get it on Google Play", cta_price: "$4.99", cta_sub: "one-time, no subscription", cta_badge: "assets/playbadge/en.svg",
       feat_eyebrow: "Features",
       feat_title: "Everything you need to keep an eye on a box",
       feat_lead: "No agent, no daemon, no third-party relay. Your phone talks to your servers directly over SSH.",
@@ -312,7 +300,7 @@
       hero_badge: "Android 14+",
       hero_title: "口袋里的服务器监控",
       hero_sub: "原生 Android，纯 SSH。填个 IP 就能盯住你的 VPS，服务器上什么都不用装。",
-      cta_get: "在 Google Play 获取", cta_price: "$4.99", cta_sub: "一次买断，无订阅",
+      cta_get: "在 Google Play 获取", cta_price: "$4.99", cta_sub: "一次买断，无订阅", cta_badge: "assets/playbadge/zh-CN.svg",
       feat_eyebrow: "功能",
       feat_title: "盯一台服务器需要的，这里都有",
       feat_lead: "不装 agent、不开守护进程、不过第三方中转。手机直接走 SSH 连你的服务器。",
@@ -354,7 +342,7 @@
       hero_badge: "Android 14+",
       hero_title: "口袋裡的伺服器監控",
       hero_sub: "原生 Android，純 SSH。填個 IP 就能盯住你的 VPS，伺服器上什麼都不用裝。",
-      cta_get: "在 Google Play 取得", cta_price: "$4.99", cta_sub: "一次買斷，無訂閱",
+      cta_get: "在 Google Play 取得", cta_price: "$4.99", cta_sub: "一次買斷，無訂閱", cta_badge: "assets/playbadge/zh-TW.svg",
       feat_eyebrow: "功能",
       feat_title: "盯一台伺服器需要的，這裡都有",
       feat_lead: "不裝 agent、不開常駐程序、不經第三方中轉。手機直接走 SSH 連你的伺服器。",
@@ -396,7 +384,7 @@
       hero_badge: "Android 14+",
       hero_title: "ポケットの中のサーバー監視",
       hero_sub: "ネイティブ Android、SSH のみ。IP を入力するだけで VPS を監視でき、サーバー側には何もインストールしません。",
-      cta_get: "Google Play で入手", cta_price: "$4.99", cta_sub: "買い切り・サブスクなし",
+      cta_get: "Google Play で入手", cta_price: "$4.99", cta_sub: "買い切り・サブスクなし", cta_badge: "assets/playbadge/ja.svg",
       feat_eyebrow: "機能",
       feat_title: "サーバーを見守るのに必要なものが揃う",
       feat_lead: "エージェントもデーモンも第三者の中継も不要。スマホが SSH で直接サーバーと通信します。",
@@ -438,7 +426,7 @@
       hero_badge: "Android 14+",
       hero_title: "주머니 속 서버 모니터링",
       hero_sub: "네이티브 Android, 순수 SSH. IP만 입력하면 VPS를 지켜봅니다. 서버에는 아무것도 설치하지 않습니다.",
-      cta_get: "Google Play에서 받기", cta_price: "$4.99", cta_sub: "한 번 구매, 구독 없음",
+      cta_get: "Google Play에서 받기", cta_price: "$4.99", cta_sub: "한 번 구매, 구독 없음", cta_badge: "assets/playbadge/ko.svg",
       feat_eyebrow: "기능",
       feat_title: "서버를 지켜보는 데 필요한 모든 것",
       feat_lead: "에이전트도, 데몬도, 제3자 중계도 없습니다. 휴대폰이 SSH로 서버와 직접 통신합니다.",

@@ -1,4 +1,4 @@
-/* Meows 站点共享 i18n：按 navigator.language 自动选语言（无按钮），填充 [data-i18n] 文本
+/* Meows 站点共享 i18n：按 navigator.language 自动选语言（无按钮）
    各页自带 I18N 字典，调用 applyI18n(I18N) 即可 */
 function pickLang() {
   const l = (navigator.language || "en").toLowerCase();
@@ -17,5 +17,13 @@ function applyI18n(dict) {
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const v = d[el.dataset.i18n];
     if (v != null) el.textContent = v;
+  });
+  document.querySelectorAll("[data-i18n-src]").forEach(el => {
+    const v = d[el.dataset.i18nSrc];
+    if (v != null) el.src = v;
+  });
+  document.querySelectorAll("[data-i18n-alt]").forEach(el => {
+    const v = d[el.dataset.i18nAlt];
+    if (v != null) el.alt = v;
   });
 }
