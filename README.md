@@ -8,6 +8,23 @@ static GitHub Pages project with English, Simplified Chinese, Traditional Chines
 Japanese, and Korean content. Theme-aware screenshots follow the visitor's system
 theme.
 
+## Language links
+
+The home page, manual, and privacy policy accept the same `lang` query values:
+
+```text
+en
+zh-Hans
+zh-Hant
+ja
+ko
+```
+
+A valid value is applied across the site and saved for later navigation. The
+`lang` parameter is then removed from the address bar while other query
+parameters and the fragment remain intact. Without `lang`, the site uses the
+saved choice or the browser language.
+
 ## Local preview
 
 Run a static server from this directory:

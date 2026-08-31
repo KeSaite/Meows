@@ -18,6 +18,7 @@
   <meta property="og:url" content="https://app.kvitra.com/docs/">
   <link rel="stylesheet" href="../assets/home.css">
   <link rel="stylesheet" href="../assets/docs.css">
+  <script src="../assets/language.js" defer></script>
   <script src="../assets/docs-i18n.js" defer></script>
   <script src="../assets/contact.js" defer></script>
 </head>
@@ -41,14 +42,14 @@
       <div class="header-tools">
         <div class="language-switcher" data-language-switcher>
           <span class="sr-only" id="language-label" data-i18n="language_label">Language</span>
-          <button class="language-trigger" id="language-trigger" type="button"
+          <button class="language-trigger" id="language-trigger" type="button" data-language-trigger
                   aria-haspopup="listbox" aria-expanded="false"
                   aria-controls="language-menu" aria-label="Language: English">
-            <span class="language-current-label" id="language-current-label">English</span>
-            <span class="language-current-code" id="language-current-code" aria-hidden="true">EN</span>
+            <span class="language-current-label" id="language-current-label" data-language-current-label>English</span>
+            <span class="language-current-code" id="language-current-code" data-language-current-code aria-hidden="true">EN</span>
             <span class="language-chevron" aria-hidden="true"></span>
           </button>
-          <div class="language-menu" id="language-menu" role="listbox"
+          <div class="language-menu" id="language-menu" role="listbox" data-language-menu
                aria-labelledby="language-label" hidden>
             <button class="language-option" type="button" role="option"
                     data-language-choice="auto" aria-selected="true">

@@ -454,14 +454,6 @@ const KO = Object.freeze({
 });
 
 const I18N = Object.freeze({ en: EN, zhCN: ZH_CN, zhTW: ZH_TW, ja: JA, ko: KO });
-const LANG_ATTR = Object.freeze({ en: "en", zhCN: "zh-Hans", zhTW: "zh-Hant", ja: "ja", ko: "ko" });
-const LANGUAGE_NAMES = Object.freeze({
-  en: { label: "English", code: "EN" },
-  zhCN: { label: "简体中文", code: "简" },
-  zhTW: { label: "繁體中文", code: "繁" },
-  ja: { label: "日本語", code: "日" },
-  ko: { label: "한국어", code: "한" }
-});
 
 // 所有页面语言均保留 Google Play 官方英文徽章
 const PLAY_BADGE = Object.freeze({ src: "assets/playbadge/en.svg", alt: "Get it on Google Play" });
@@ -623,22 +615,8 @@ function updateScreenshots(languageKey) {
   });
 }
 
-function detectLanguage() {
-  const language = (navigator.language || "en").toLowerCase();
-  if (language.startsWith("zh")) {
-    return language.includes("tw") || language.includes("hk") || language.includes("mo") || language.includes("hant") ? "zhTW" : "zhCN";
-  }
-  if (language.startsWith("ja")) return "ja";
-  if (language.startsWith("ko")) return "ko";
-  return "en";
-}
-
-function applyLanguage(choice) {
-  const key = choice === "auto" ? detectLanguage() : (I18N[choice] ? choice : "en");
-  const dict = I18N[key];
-
-  document.documentElement.lang = LANG_ATTR[key];
-  document.documentElement.dataset.language = key;
+function applyLanguage(key) {
+  const dict = I18N[key] || I18N.en;
   document.title = dict.meta_title;
 
   const description = document.querySelector('meta[name="description"]');
@@ -665,106 +643,22 @@ function applyLanguage(choice) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  const switcher = document.querySelector("[data-language-switcher]");
-  const trigger = document.getElementById("language-trigger");
-  const menu = document.getElementById("language-menu");
-  const currentLabel = document.getElementById("language-current-label");
-  const currentCode = document.getElementById("language-current-code");
-  const options = [...menu.querySelectorAll("[data-language-choice]")];
-  const validChoices = new Set(["auto", ...Object.keys(I18N)]);
-
-  let saved = "auto";
-  try { saved = localStorage.getItem("meows-site-language") || "auto"; } catch (_) {}
-  let selectedChoice = validChoices.has(saved) ? saved : "auto";
-  let activeLanguage = "en";
-
-  function updateSwitcher(appliedKey) {
-    const name = LANGUAGE_NAMES[appliedKey] || LANGUAGE_NAMES.en;
-    const dict = I18N[appliedKey] || I18N.en;
-    currentLabel.textContent = name.label;
-    currentCode.textContent = name.code;
-    trigger.setAttribute("aria-label", `${dict.language_label}: ${name.label}${selectedChoice === "auto" ? ` · ${dict.language_auto}` : ""}`);
-
-    options.forEach((option) => {
-      option.setAttribute("aria-selected", String(option.dataset.languageChoice === selectedChoice));
-    });
-  }
-
-  function closeMenu(returnFocus = false) {
-    menu.hidden = true;
-    trigger.setAttribute("aria-expanded", "false");
-    if (returnFocus) trigger.focus();
-  }
-
-  function openMenu(focusSelected = false) {
-    menu.hidden = false;
-    trigger.setAttribute("aria-expanded", "true");
-    if (focusSelected) {
-      const selected = options.find((option) => option.dataset.languageChoice === selectedChoice) || options[0];
-      selected.focus();
+  const language = window.MeowsLanguage.initialize({
+    languages: Object.keys(I18N),
+    apply: applyLanguage,
+    labels: (key) => {
+      const dict = I18N[key] || I18N.en;
+      return {
+        languageLabel: dict.language_label,
+        automaticLabel: dict.language_auto
+      };
     }
-  }
+  });
 
-  function chooseLanguage(choice) {
-    selectedChoice = validChoices.has(choice) ? choice : "auto";
-    try { localStorage.setItem("meows-site-language", selectedChoice); } catch (_) {}
-    activeLanguage = applyLanguage(selectedChoice);
-    updateSwitcher(activeLanguage);
-    closeMenu(true);
-  }
-
-  activeLanguage = applyLanguage(selectedChoice);
-  updateSwitcher(activeLanguage);
-
-  const handleThemeChange = () => updateScreenshots(activeLanguage);
+  const handleThemeChange = () => updateScreenshots(language.activeLanguage);
   if (typeof THEME_MEDIA.addEventListener === "function") {
     THEME_MEDIA.addEventListener("change", handleThemeChange);
   } else if (typeof THEME_MEDIA.addListener === "function") {
     THEME_MEDIA.addListener(handleThemeChange);
   }
-
-  trigger.addEventListener("click", () => {
-    if (menu.hidden) openMenu(false);
-    else closeMenu(false);
-  });
-
-  trigger.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-      event.preventDefault();
-      openMenu(true);
-    }
-  });
-
-  options.forEach((option) => {
-    option.addEventListener("click", () => chooseLanguage(option.dataset.languageChoice));
-  });
-
-  menu.addEventListener("keydown", (event) => {
-    const focusedIndex = options.indexOf(document.activeElement);
-    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-      event.preventDefault();
-      const direction = event.key === "ArrowDown" ? 1 : -1;
-      const nextIndex = focusedIndex < 0 ? 0 : (focusedIndex + direction + options.length) % options.length;
-      options[nextIndex].focus();
-    } else if (event.key === "Home") {
-      event.preventDefault();
-      options[0].focus();
-    } else if (event.key === "End") {
-      event.preventDefault();
-      options[options.length - 1].focus();
-    } else if (event.key === "Escape") {
-      event.preventDefault();
-      closeMenu(true);
-    } else if (event.key === "Tab") {
-      closeMenu(false);
-    }
-  });
-
-  document.addEventListener("pointerdown", (event) => {
-    if (!menu.hidden && !switcher.contains(event.target)) closeMenu(false);
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !menu.hidden) closeMenu(true);
-  });
 });
