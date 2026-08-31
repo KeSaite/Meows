@@ -7,11 +7,6 @@
   min-width: 100px;
 }
 
-.docs-brand img {
-  width: 28px;
-  height: 28px;
-}
-
 .docs-shell {
   display: grid;
   grid-template-columns: 220px minmax(0, 780px);
