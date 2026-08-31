@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Meows Manual</title>
+  <meta name="description" content="How to set up and use Meows for SSH monitoring, terminal sessions, Docker, tunnels, backups, Lens, and network tools.">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../favicon.png">
+  <link rel="canonical" href="https://app.kvitra.com/docs/">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f0e7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171411">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Meows Manual">
+  <meta property="og:description" content="Set up and use Meows without installing an agent on your servers.">
+  <meta property="og:url" content="https://app.kvitra.com/docs/">
+  <link rel="stylesheet" href="../assets/home.css">
+  <link rel="stylesheet" href="../assets/docs.css">
+  <script src="../assets/docs-i18n.js" defer></script>
+  <script src="../assets/contact.js" defer></script>
+</head>
+<body class="docs-page">
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand docs-brand" href="../" aria-label="Meows home" data-i18n-aria-label="brand_home">
+        <img src="../favicon.png" width="28" height="28" alt="">
+        <span>Meows</span>
+      </a>
+
+      <nav class="nav" aria-label="Manual navigation" data-i18n-aria-label="header_nav_label">
+        <a href="#start" data-i18n="nav_start">Get started</a>
+        <a href="#monitoring" data-i18n="nav_monitoring">Monitoring</a>
+        <a href="#security" data-i18n="nav_security">Security</a>
+        <a href="#troubleshooting" data-i18n="nav_troubleshooting">Troubleshooting</a>
+      </nav>
+
+      <div class="header-tools">
+        <div class="language-switcher" data-language-switcher>
+          <span class="sr-only" id="language-label" data-i18n="language_label">Language</span>
+          <button class="language-trigger" id="language-trigger" type="button"
+                  aria-haspopup="listbox" aria-expanded="false"
+                  aria-controls="language-menu" aria-label="Language: English">
+            <span class="language-current-label" id="language-current-label">English</span>
+            <span class="language-current-code" id="language-current-code" aria-hidden="true">EN</span>
+            <span class="language-chevron" aria-hidden="true"></span>
+          </button>
+          <div class="language-menu" id="language-menu" role="listbox"
+               aria-labelledby="language-label" hidden>
+            <button class="language-option" type="button" role="option"
+                    data-language-choice="auto" aria-selected="true">
+              <span data-i18n="language_auto">Browser language</span>
+              <span class="language-option-code">AUTO</span>
+            </button>
+            <button class="language-option" type="button" role="option"
+                    data-language-choice="en" aria-selected="false">
+              <span>English</span>
+              <span class="language-option-code">EN</span>
+            </button>
+            <button class="language-option" type="button" role="option"
+                    data-language-choice="zhCN" aria-selected="false">
+              <span>简体中文</span>
+              <span class="language-option-code">简</span>
+            </button>
+            <button class="language-option" type="button" role="option"
+                    data-language-choice="zhTW" aria-selected="false">
+              <span>繁體中文</span>
+              <span class="language-option-code">繁</span>
+            </button>
+            <button class="language-option" type="button" role="option"
+                    data-language-choice="ja" aria-selected="false">
+              <span>日本語</span>
+              <span class="language-option-code">日</span>
+            </button>
+            <button class="language-option" type="button" role="option"
+                    data-language-choice="ko" aria-selected="false">
+              <span>한국어</span>
+              <span class="language-option-code">한</span>
+            </button>
+          </div>
+        </div>
+        <a class="header-cta" href="../" data-i18n="home_link">Home</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="docs-shell shell">
+    <aside class="docs-sidebar" aria-label="On this page" data-i18n-aria-label="toc_label">
+      <p class="docs-sidebar-title" data-i18n="toc_title">Manual</p>
+      <nav>
+        <a href="#before-you-start" data-i18n="toc_before">Before you start</a>
+        <a href="#start" data-i18n="toc_start">Add a server</a>
+        <a href="#connections" data-i18n="toc_connections">Connections</a>
+        <a href="#monitoring" data-i18n="toc_monitoring">Monitoring</a>
+        <a href="#shell" data-i18n="toc_shell">Shell</a>
+        <a href="#docker" data-i18n="toc_docker">Docker</a>
+        <a href="#tunnels" data-i18n="toc_tunnels">SSH tunnels</a>
+        <a href="#background" data-i18n="toc_background">Background and alerts</a>
+        <a href="#security" data-i18n="toc_security">Security and backup</a>
+        <a href="#settings" data-i18n="toc_settings">Settings</a>
+        <a href="#lens" data-i18n="toc_lens">Lens and tools</a>
+        <a href="#troubleshooting" data-i18n="toc_troubleshooting">Troubleshooting</a>
+      </nav>
+    </aside>
+
+    <article class="docs-content">
+      <div class="docs-intro">
+        <p class="kicker" data-i18n="intro_kicker">Meows manual</p>
+        <h1 data-i18n="intro_title">Using Meows</h1>
+        <p class="docs-lead" data-i18n="intro_body">Start by adding a server. The sections below explain each part of Meows and where to look when something goes wrong.</p>
+        <p class="docs-version" data-i18n="intro_version">Android 14 or later · English, Simplified Chinese, Traditional Chinese, Japanese, and Korean</p>
+      </div>
+
+      <details class="docs-mobile-toc">
+        <summary data-i18n="mobile_toc">On this page</summary>
+        <nav aria-label="Mobile manual navigation" data-i18n-aria-label="mobile_toc_label">
+          <a href="#before-you-start" data-i18n="toc_before">Before you start</a>
+          <a href="#start" data-i18n="toc_start">Add a server</a>
+          <a href="#connections" data-i18n="toc_connections">Connections</a>
+          <a href="#monitoring" data-i18n="toc_monitoring">Monitoring</a>
+          <a href="#shell" data-i18n="toc_shell">Shell</a>
+          <a href="#docker" data-i18n="toc_docker">Docker</a>
+          <a href="#tunnels" data-i18n="toc_tunnels">SSH tunnels</a>
+          <a href="#background" data-i18n="toc_background">Background and alerts</a>
+          <a href="#security" data-i18n="toc_security">Security and backup</a>
+          <a href="#settings" data-i18n="toc_settings">Settings</a>
+          <a href="#lens" data-i18n="toc_lens">Lens and tools</a>
+          <a href="#troubleshooting" data-i18n="toc_troubleshooting">Troubleshooting</a>
+        </nav>
+      </details>
+
+      <section id="before-you-start" class="docs-section">
+        <p class="docs-section-number">01</p>
+        <h2 data-i18n="before_title">Before you start</h2>
+        <p data-i18n="before_body">Meows is a native Android SSH client and monitor. Connections originate on your device and do not pass through a Meows relay. The server does not need any additional software.</p>
+
+        <div class="docs-requirements">
+          <h3 id="requirements-title" data-i18n="requirements_title">Requirements</h3>
+          <ul>
+            <li data-i18n="requirements_android">An Android device running Android 14 or later</li>
+            <li data-i18n="requirements_ssh">A reachable SSH server and a valid password or private key</li>
+            <li data-i18n="requirements_metrics">Monitoring reads only what the SSH account can access and does not invoke sudo. Terminal can still work when some or all metrics are unavailable</li>
+            <li data-i18n="requirements_docker">For Docker features, a Docker installation that the same SSH user can access</li>
+          </ul>
+        </div>
+
+        <h3 data-i18n="boundaries_title">What happens when you use Meows</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th data-i18n="boundary_item">Item</th><th data-i18n="boundary_behavior">What happens</th></tr>
+            </thead>
+            <tbody>
+              <tr><th data-i18n="boundary_monitoring_h">Automatic monitoring</th><td data-i18n="boundary_monitoring_b">While monitoring is active, Meows automatically collects the server metrics available to the SSH account, checks whether Docker is available, and runs the unlock checks described below when the server supports them. It does not invoke sudo or change Docker state.</td></tr>
+              <tr><th data-i18n="boundary_actions_h">User actions</th><td data-i18n="boundary_actions_b">Commands entered in Shell run only when you submit them. Meows starts, stops, or restarts a Docker container, or starts a tunnel, only when you trigger that action.</td></tr>
+              <tr><th data-i18n="boundary_creds_h">SSH credentials</th><td data-i18n="boundary_creds_b">Passwords and private keys are encrypted on the device. An optional full backup includes stored credentials and is separately encrypted before upload with a key derived from your master password.</td></tr>
+              <tr><th data-i18n="boundary_history_h">Monitoring history</th><td data-i18n="boundary_history_b">Monitoring history stays on the device. Older entries are removed automatically.</td></tr>
+              <tr><th data-i18n="boundary_tools_h">Network tools</th><td data-i18n="boundary_tools_b">DNS, WHOIS, and TLS use the network only after you start a query. Local IP database lookups stay on the device.</td></tr>
+              <tr><th data-i18n="boundary_backup_h">Google Drive backup</th><td data-i18n="boundary_backup_b">This is optional. A backup is encrypted on your device before it is stored in Meows' hidden app data folder in Google Drive.</td></tr>
+              <tr><th data-i18n="boundary_permission_h">Notification permission</th><td data-i18n="boundary_permission_b">Only notification permission is requested. You can deny it and continue using the app without notification alerts.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="docs-note" data-i18n="trust_trial">For your first test, use a temporary or non-critical server with a dedicated unprivileged SSH account. Do not grant it sudo or Docker access. When you are finished, remove the saved server from Meows and revoke the test key or account on the server.</p>
+        <p class="docs-note" data-i18n="boundaries_note">Meows has no advertising SDKs, subscriptions, analytics, or telemetry. See the privacy policy for full details on how data is handled.</p>
+
+        <h3 data-i18n="layout_title">Where to find things</h3>
+        <div class="table-wrap">
+          <table>
+            <tbody>
+              <tr><th data-i18n="layout_overview_h">Dashboard</th><td data-i18n="layout_overview_b">Add and group servers, check live cards and the map, open history, configure alerts, and enter Docker management.</td></tr>
+              <tr><th data-i18n="layout_shell_h">Terminal</th><td data-i18n="layout_shell_b">Choose a saved server, then use the connection icon to start a terminal session.</td></tr>
+              <tr><th data-i18n="layout_settings_h">Settings</th><td data-i18n="layout_settings_b">Manage appearance, background monitoring, bastions, tunnels, backups, security controls, and the built-in tools.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="docs-note" data-i18n="launcher_shortcuts">Long-press the Meows app icon for Add Server, Status, Settings, and Terminal shortcuts.</p>
+      </section>
+
+      <section id="start" class="docs-section">
+        <p class="docs-section-number">02</p>
+        <h2 data-i18n="start_title">Add your first server</h2>
+        <ol class="steps">
+          <li><span data-i18n="start_1">Open Dashboard and tap Add Server.</span></li>
+          <li><span data-i18n="start_2">Enter a display name, host, SSH port, and username.</span></li>
+          <li><span data-i18n="start_3">Choose password or private-key authentication, then enter the credential.</span></li>
+          <li><span data-i18n="start_4">Optionally choose a bastion host, group, or per-server refresh interval, then save.</span></li>
+        </ol>
+
+        <h3 data-i18n="fields_title">Connection fields</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th data-i18n="field_name">Field</th><th data-i18n="field_use">How it is used</th></tr></thead>
+            <tbody>
+              <tr><th data-i18n="field_display_h">Name</th><td data-i18n="field_display_b">The name shown in the server list.</td></tr>
+              <tr><th data-i18n="field_host_h">Host and port</th><td data-i18n="field_host_b">A numeric IP address or DNS hostname, plus an SSH port from 1 to 65535. The default port is 22.</td></tr>
+              <tr><th data-i18n="field_user_h">Username</th><td data-i18n="field_user_b">The remote SSH account used for authentication and all server-side operations.</td></tr>
+              <tr><th data-i18n="field_auth_h">Authentication</th><td data-i18n="field_auth_b">Password or a pasted SSH private key. An encrypted private key also requires its passphrase.</td></tr>
+              <tr><th data-i18n="field_refresh_h">Refresh interval</th><td data-i18n="field_refresh_b">Choose 1, 2, 3, or 5 seconds, or leave it unselected to inherit the global setting. The default global interval is 3 seconds.</td></tr>
+              <tr><th data-i18n="field_route_h">Connection route</th><td data-i18n="field_route_b">Use a direct connection or a saved bastion host.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="docs-note" data-i18n="edit_credential_note">When editing a server, leaving the credential blank preserves the saved credential only while the authentication type remains unchanged.</p>
+        <p class="docs-note" data-i18n="server_validation_note">Server names must be unique, ignoring letter case. Even with a different name, the same host, port, and username can be added only once. Usernames are case-sensitive.</p>
+
+        <h3 data-i18n="server_after_title">After saving</h3>
+        <p data-i18n="server_after_body">After you save it, the server appears on Dashboard and monitoring starts automatically.</p>
+        <ul>
+          <li data-i18n="server_pin">Double-tap a server card to pin it to the top or unpin it.</li>
+          <li data-i18n="server_delete">Deleting a server removes its saved configuration, credentials, alerts, local monitoring history, and any tunnel configurations that use it. It does not change the remote server.</li>
+        </ul>
+      </section>
+
+      <section id="connections" class="docs-section">
+        <p class="docs-section-number">03</p>
+        <h2 data-i18n="connections_title">Connections, bastion hosts, and host keys</h2>
+        <p data-i18n="connections_body">For a direct connection, your device connects to the server. With a bastion, it connects to the bastion first, then uses the target server's own credentials to reach the target.</p>
+        <div class="connection-diagrams" role="group" aria-label="SSH connection paths" data-i18n-aria-label="connection_paths_label">
+          <div><span data-i18n="direct_label">Direct</span><code data-i18n="direct_path">Android device → server</code></div>
+          <div><span data-i18n="bastion_label">Via bastion</span><code data-i18n="bastion_path">Android device → bastion → target server</code></div>
+        </div>
+        <ul>
+          <li data-i18n="connection_bastion_reuse">One saved bastion can be reused by multiple servers. In Bastion Configuration, double-tap a bastion card to pin it to the top or unpin it.</li>
+          <li data-i18n="connection_bastion_delete">Deleting a bastion switches affected servers back to direct mode. It does not delete those servers.</li>
+          <li data-i18n="connection_tofu">Meows records the server host key on first connection. If that key changes later, Meows blocks the connection until you review the new key.</li>
+        </ul>
+
+        <h3 data-i18n="bastion_setup_title">Set up a bastion</h3>
+        <ol class="steps">
+          <li><span data-i18n="bastion_setup_1">Open Settings, then Bastion Configuration.</span></li>
+          <li><span data-i18n="bastion_setup_2">Add a name, host, port, username, and password or private key.</span></li>
+          <li><span data-i18n="bastion_setup_3">Tap Test to check the connection, then tap Add to save the bastion.</span></li>
+          <li><span data-i18n="bastion_setup_4">Edit the target server and select the saved bastion as its connection route.</span></li>
+        </ol>
+
+        <h3 data-i18n="reconnect_title">Reconnects and retries</h3>
+        <p data-i18n="reconnect_body">When a VPN or the default network changes, Meows disconnects the affected monitoring sessions and reconnects over the current network.</p>
+        <p class="docs-note" data-i18n="reconnect_manual">Meows retries temporary network and server failures automatically, with pauses that grow to about 30 seconds. Automatic retry stops when authentication needs attention. Edit the server if its password or private key is missing, invalid, or wrong. If the saved authentication information is correct, check SSH access on the target server or bastion, fix it, then use Retry connection on the card.</p>
+      </section>
+
+      <section id="monitoring" class="docs-section">
+        <p class="docs-section-number">04</p>
+        <h2 data-i18n="monitoring_title">Dashboard and monitoring</h2>
+        <p data-i18n="monitoring_body">Dashboard shows live server cards and a country or region map. Meows uses its bundled offline database to find a server's country or region. IP data is not reliable enough for city-level location, so the map stops there.</p>
+
+        <h3 data-i18n="overview_controls_title">Finding a server</h3>
+        <ul>
+          <li data-i18n="overview_filter">Choose a group to filter servers, or All to clear the filter.</li>
+          <li data-i18n="overview_mode">Use the switch in the header to move between World Map and Data Monitoring.</li>
+          <li data-i18n="overview_map">Select a country or region marker to see the servers in that area.</li>
+          <li data-i18n="overview_sky">The map also shows day and night shading and the current positions of the Sun and Moon. Select either marker for details.</li>
+          <li data-i18n="overview_unlocated">Servers without a usable location remain available under Servers Not Located.</li>
+          <li data-i18n="overview_summary">Data Monitoring shows the current online and offline counts for the active filter.</li>
+        </ul>
+
+        <h3 data-i18n="cards_title">Server cards</h3>
+        <p data-i18n="cards_body">A server card shows its connection state and the latest metrics Meows could read.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th data-i18n="card_area_h">Area</th><th data-i18n="card_area_b">What it contains</th></tr></thead>
+            <tbody>
+              <tr><th data-i18n="card_usage_h">Usage</th><td data-i18n="card_usage_b">CPU, memory, and mounted storage usage.</td></tr>
+              <tr><th data-i18n="card_network_h">Network</th><td data-i18n="card_network_b">Current upload and download rate, plus transferred totals when those counters are available.</td></tr>
+              <tr><th data-i18n="card_chips_h">Card badges</th><td data-i18n="card_chips_b">Region, operating system, architecture, kernel, ASN, verified unlock results, Docker count, TCP connections, failed logins, updates, uptime, consecutive successful requests, and latency.</td></tr>
+              <tr><th data-i18n="card_actions_h">Actions</th><td data-i18n="card_actions_b">Open history or Docker, configure alerts, and edit or delete the server. Retry connection is also available after authentication is rejected.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="docs-note" data-i18n="card_chip_note">Card badge visibility applies to every server. Hiding a badge type only changes what the cards show. It does not stop monitoring or disable a feature.</p>
+
+        <h3 data-i18n="unlock_title">Unlock results and server facts</h3>
+        <p data-i18n="unlock_body">Once monitoring data is available, Meows uses the current SSH connection to check Claude, Gemini, ChatGPT, Netflix, Disney+, Prime Video, YouTube Premium, and Google Scholar from the server. Only services confirmed as unlocked appear on the card. Netflix access limited to Originals Only is not counted as unlocked.</p>
+        <p class="docs-note" data-i18n="failed_login_note">Failed-login data depends on whether the SSH account can read the authentication log, the current boot's journal, or a system log. A blank or unavailable result can be a permission or platform limitation rather than a zero count.</p>
+
+        <h3 data-i18n="alerts_title">Per-server alerts</h3>
+        <p data-i18n="alerts_body">Open Alert Settings at the bottom of a server card. Turn on alerts, set the CPU, memory, disk, and latency thresholds, and choose whether to be notified when the server disconnects.</p>
+
+        <h3 data-i18n="charts_title">History charts</h3>
+        <p data-i18n="charts_body">Use the chart action in a server card header, then choose a 1, 2, or 5 minute range. The metric row scrolls horizontally. Tap Return to Status to show live data on the card again. History stays on your device for a short time.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th data-i18n="chart_metric">Metric</th><th data-i18n="chart_detail">Detail below the chart</th></tr></thead>
+            <tbody>
+              <tr><th data-i18n="chart_cpu_h">CPU</th><td data-i18n="chart_cpu_d">Top processes by CPU</td></tr>
+              <tr><th data-i18n="chart_memory_h">Memory</th><td data-i18n="chart_memory_d">Top processes by memory</td></tr>
+              <tr><th data-i18n="chart_storage_h">Disk</th><td data-i18n="chart_storage_d">Mounted filesystems and capacity</td></tr>
+              <tr><th data-i18n="chart_disk_h">Disk read</th><td data-i18n="chart_disk_d">Read rate by device</td></tr>
+              <tr><th data-i18n="chart_disk_write_h">Disk write</th><td data-i18n="chart_disk_write_d">Write rate by device</td></tr>
+              <tr><th data-i18n="chart_network_h">Download</th><td data-i18n="chart_network_d">Receive rate by interface</td></tr>
+              <tr><th data-i18n="chart_upload_h">Upload</th><td data-i18n="chart_upload_d">Transmit rate by interface</td></tr>
+              <tr><th data-i18n="chart_tcp_h">TCP Connections</th><td data-i18n="chart_tcp_d">Listening local ports and established connections without a current listener</td></tr>
+              <tr><th data-i18n="chart_latency_h">Latency</th><td data-i18n="chart_latency_d">Current value, average, P50, P95, and jitter</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="shell" class="docs-section">
+        <p class="docs-section-number">05</p>
+        <h2 data-i18n="shell_title">Shell</h2>
+        <p data-i18n="shell_body">Shell opens a separate interactive SSH session.</p>
+
+        <h3 data-i18n="shell_start_title">Start and end a session</h3>
+        <ol class="steps">
+          <li><span data-i18n="shell_start_1">Open Terminal and choose one of your saved servers.</span></li>
+          <li><span data-i18n="shell_start_2">After selecting a server, tap the connection icon in the upper-right corner and wait for the remote prompt. Selecting a server does not connect to it.</span></li>
+          <li><span data-i18n="shell_start_3">Tap the terminal to focus the keyboard. Tapping a recognized value in ordinary output opens Lens. Tapping elsewhere returns input focus to the terminal.</span></li>
+          <li><span data-i18n="shell_start_4">When the interactive session is no longer needed, tap the disconnect icon in the upper-right corner.</span></li>
+        </ol>
+
+        <h3 data-i18n="shell_toolbar_title">Terminal controls</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th data-i18n="shell_key_h">Control</th><th data-i18n="shell_key_b">Use</th></tr></thead>
+            <tbody>
+              <tr><th data-i18n="shell_tab_h">Tab and Esc</th><td data-i18n="shell_tab_b">Send keys that are awkward to enter from a phone keyboard.</td></tr>
+              <tr><th data-i18n="shell_ctrl_h">Ctrl and Ctrl+C</th><td data-i18n="shell_ctrl_b">Tap Ctrl, then enter a letter to send its control code. Use Ctrl+C to interrupt the foreground command.</td></tr>
+              <tr><th data-i18n="shell_arrow_h">Arrow keys</th><td data-i18n="shell_arrow_b">Edit commands, browse command history, and navigate terminal programs. Hold an arrow to repeat it.</td></tr>
+              <tr><th data-i18n="shell_clear_h">Clear</th><td data-i18n="shell_clear_b">Clear the current display and scrollback, then send Ctrl+L to redraw the foreground program.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li data-i18n="shell_tui">top can redraw the main screen, while htop commonly uses an alternate screen. Exit full-screen programs with their normal key or Ctrl+C before reviewing main-screen scrollback.</li>
+          <li data-i18n="shell_color">Terminal colors follow Meows' dynamic theme.</li>
+          <li data-i18n="shell_lens">Lens is available in ordinary terminal output, but not while a full-screen program is using the alternate screen.</li>
+          <li data-i18n="shell_scroll">Scroll up to read earlier output, and move long lines sideways when needed. The view stays where it is while you look back. Return to the bottom or type to follow new output again.</li>
+        </ul>
+      </section>
+
+      <section id="docker" class="docs-section">
+        <p class="docs-section-number">06</p>
+        <h2 data-i18n="docker_title">Docker</h2>
+        <p data-i18n="docker_body">Docker management runs through the selected server's SSH connection. You do not need to expose the Docker Remote API.</p>
+        <h3 data-i18n="docker_open_title">Open and use Docker</h3>
+        <ol class="steps">
+          <li><span data-i18n="docker_open_1">After Docker is detected, use the Docker action in the header of the connected server card.</span></li>
+          <li><span data-i18n="docker_open_2">Check the engine information and container totals, then filter the list by all, running, or stopped containers.</span></li>
+          <li><span data-i18n="docker_open_3">Each container card shows the available resource and network facts, with actions to start, stop, restart, or open logs.</span></li>
+        </ol>
+        <ul>
+          <li data-i18n="docker_permissions">The same SSH user must already be allowed to use Docker. Meows does not automatically elevate with sudo.</li>
+          <li data-i18n="docker_logs">Logs open full screen. The view stays where it is while you scroll back through older entries. Return to the bottom or tap Latest to see new entries as they arrive. You can also copy logs or tap a recognized value to open Lens.</li>
+          <li data-i18n="docker_unavailable">If Docker is not installed, the Docker daemon is unavailable, or the SSH user lacks permission, the Docker button is not shown on the server card. If a Docker page is already open, it shows Docker not detected. Shell and monitoring remain available.</li>
+        </ul>
+      </section>
+
+      <section id="tunnels" class="docs-section">
+        <p class="docs-section-number">07</p>
+        <h2 data-i18n="tunnels_title">SSH tunnels</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th data-i18n="tunnel_type">Type</th><th data-i18n="tunnel_listener">Where it listens</th><th data-i18n="tunnel_target">Which side connects to the target</th></tr></thead>
+            <tbody>
+              <tr><th data-i18n="tunnel_local_h">Local forwarding</th><td data-i18n="tunnel_local_l">Your Android device</td><td data-i18n="tunnel_local_t">The SSH server</td></tr>
+              <tr><th data-i18n="tunnel_remote_h">Remote forwarding</th><td data-i18n="tunnel_remote_l">The SSH server</td><td data-i18n="tunnel_remote_t">Your Android device</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 data-i18n="tunnel_create_title">Create a tunnel</h3>
+        <ol class="steps">
+          <li><span data-i18n="tunnel_create_1">Open Settings, then Tunnel Configuration, and add a tunnel.</span></li>
+          <li><span data-i18n="tunnel_create_2">Choose the saved server that the tunnel will use.</span></li>
+          <li><span data-i18n="tunnel_create_3">Choose Local or Remote, then fill in Bind Port, Host Address, and Target Port.</span></li>
+          <li><span data-i18n="tunnel_create_4">Save the configuration and start it from the tunnel list.</span></li>
+        </ol>
+        <ul>
+          <li data-i18n="tunnel_pin">Double-tap a tunnel card to pin or unpin it. Editing or deleting a running tunnel stops the tunnel first.</li>
+          <li data-i18n="tunnel_local_use">For local forwarding, other apps on the device connect to the configured local bind port.</li>
+          <li data-i18n="tunnel_network">For remote forwarding, the Android device connects to the target. If that target is outside the device, the connection follows the device's current network.</li>
+          <li data-i18n="tunnel_lifecycle">A running tunnel can continue working while Meows is in the foreground or Persistent Notification is enabled.</li>
+          <li data-i18n="tunnel_restart">After you stop a tunnel, it stays stopped until you start it again.</li>
+        </ul>
+      </section>
+
+      <section id="background" class="docs-section">
+        <p class="docs-section-number">08</p>
+        <h2 data-i18n="background_title">Background monitoring and alerts</h2>
+        <h3 data-i18n="background_enable_title">Enable background monitoring</h3>
+        <ol class="steps">
+          <li><span data-i18n="background_enable_1">Open Settings and turn on Persistent Notification.</span></li>
+          <li><span data-i18n="background_enable_2">Allow notifications when Android asks so the persistent notification and threshold alerts can appear.</span></li>
+        </ol>
+        <ul>
+          <li data-i18n="background_local">Alerts are evaluated on the Android device. There is no cloud push server watching your hosts.</li>
+          <li data-i18n="background_thresholds">When several thresholds are crossed at once, Meows combines them into one notification.</li>
+          <li data-i18n="background_oem">Android vendors can still restrict background work. If monitoring stops after the app leaves the foreground, remove battery restrictions for Meows in system settings.</li>
+          <li data-i18n="background_limit">This is device-side monitoring, not a guaranteed 24-hour remote monitoring service. Force-stopping the app also stops its monitoring and alerts.</li>
+        </ul>
+      </section>
+
+      <section id="security" class="docs-section">
+        <p class="docs-section-number">09</p>
+        <h2 data-i18n="security_title">Credentials, privacy, and backup</h2>
+
+        <h3 data-i18n="credentials_title">Credentials and trusted hosts</h3>
+        <ul>
+          <li data-i18n="credentials_encrypt">SSH passwords and private keys are encrypted on the device with keys protected by Android Keystore.</li>
+          <li data-i18n="credentials_hostkey">A host key identifies the remote SSH server. It is not the private key used to sign in. After the first connection, Meows rejects a different host key from the same host and port.</li>
+          <li data-i18n="credentials_privacy">Privacy Mode hides Meows from the recent-apps preview and blocks screenshots and screen recording while enabled.</li>
+          <li data-i18n="credentials_clear">Clear Secure Data disconnects SSH sessions and deletes stored server and bastion credentials plus trusted host keys. Server and bastion configurations remain.</li>
+        </ul>
+
+        <h3 data-i18n="backup_title">Google Drive backup</h3>
+        <p data-i18n="backup_body">Backups created in the current format are encrypted on your device, then stored in Meows' hidden app data folder in Google Drive. They do not appear in the ordinary Drive file list. The cat name and short code are display names used only inside Meows.</p>
+        <h3 data-i18n="backup_create_title">Create, restore, or delete a backup</h3>
+        <ol class="steps">
+          <li><span data-i18n="backup_create_1">Open Cloud Backup in Settings, then sign in with the Google account where you want to store the backup.</span></li>
+          <li><span data-i18n="backup_create_2">Enter a 15–256 character master password using English letters, numbers, spaces, or symbols. When the on-device strength check shows Strong, choose Create Backup.</span></li>
+          <li><span data-i18n="backup_create_3">The list shows each backup's display name, creation time, and size. Refresh it after changes made from another device.</span></li>
+          <li><span data-i18n="backup_create_4">To restore a backup, select Download, confirm Restore, and enter its master password. Select Delete to remove it instead.</span></li>
+        </ol>
+        <ul>
+          <li data-i18n="backup_contents">Current backups contain server and bastion settings and credentials, tunnels, alert thresholds, the global refresh interval, theme, language, privacy mode, persistent notification setting, terminal font and size, and card badge visibility. Monitoring history is not included.</li>
+          <li data-i18n="backup_password">Creating or restoring requires the master password each time. It is not recoverable. Losing it makes that backup impossible to restore.</li>
+          <li data-i18n="backup_restore">Restore can replace current app data. Review the confirmation before continuing.</li>
+          <li data-i18n="backup_uninstall">Uninstalling Meows removes its data from this device. It does not delete backups stored in Google Drive.</li>
+          <li data-i18n="backup_delete">Deleting a backup from the list permanently removes that selected cloud backup.</li>
+          <li data-i18n="backup_legacy">If you still have a JSON backup created by Meows 1.0.153 or earlier, restore it in the current version and create a new backup. Meows 1.0.160 will no longer list or import those files, but it will not delete them from Drive.</li>
+        </ul>
+      </section>
+
+      <section id="settings" class="docs-section">
+        <p class="docs-section-number">10</p>
+        <h2 data-i18n="settings_title">Settings reference</h2>
+        <p data-i18n="settings_body">A refresh interval set on a server overrides the global interval here.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th data-i18n="settings_group_h">Section</th><th data-i18n="settings_group_b">What you can change or open</th></tr></thead>
+            <tbody>
+              <tr><th data-i18n="settings_appearance_h">Appearance Settings</th><td data-i18n="settings_appearance_b">Follow System, Light, or Dark, plus the badges shown on server cards.</td></tr>
+              <tr><th data-i18n="settings_security_h">Security Settings</th><td data-i18n="settings_security_b">Privacy Mode, Cloud Backup, bastion and tunnel configuration, and Clear Secure Data.</td></tr>
+              <tr><th data-i18n="settings_app_h">App Settings</th><td data-i18n="settings_app_b">Global refresh interval, language, terminal font and size, and Persistent Notification.</td></tr>
+              <tr><th data-i18n="settings_data_h">Data Management</th><td data-i18n="settings_data_b">The installed offline IP database source, date, and size, plus the size of Meows' local database.</td></tr>
+              <tr><th data-i18n="settings_tools_h">Utilities</th><td data-i18n="settings_tools_b">Linux and C references, network queries, and local calculators.</td></tr>
+              <tr><th data-i18n="settings_about_h">About</th><td data-i18n="settings_about_b">Acknowledgements, open-source licenses, version information, and the contact address.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 data-i18n="terminal_settings_title">Terminal appearance</h3>
+        <p data-i18n="terminal_settings_body">The terminal can use System Monospace, Sarasa Fixed, JetBrains Mono, Cascadia Mono, or Maple Mono. Font size can be set from 6 to 20. These settings change only how the terminal looks in Meows, not settings on the server.</p>
+      </section>
+
+      <section id="lens" class="docs-section">
+        <p class="docs-section-number">11</p>
+        <h2 data-i18n="lens_title">Meows Lens and tools</h2>
+        <p data-i18n="lens_body">Lens marks supported text in ordinary Shell output and Docker logs. Tap it to see the available actions. Recognizing text alone does not perform a lookup, open a URL, or execute a command.</p>
+
+        <h3 data-i18n="lens_recognizes_title">What Lens recognizes</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th data-i18n="lens_input_h">Recognized input</th><th data-i18n="lens_action_h">Actions offered</th></tr></thead>
+            <tbody>
+              <tr><th data-i18n="lens_ip_h">IP address</th><td data-i18n="lens_ip_b">Offline IP facts, WHOIS, reverse DNS, and relevant command suggestions.</td></tr>
+              <tr><th data-i18n="lens_network_h">IP network or CIDR</th><td data-i18n="lens_network_b">Calculate the recognized network's subnet in Lens.</td></tr>
+              <tr><th data-i18n="lens_domain_h">Domain name</th><td data-i18n="lens_domain_b">A and AAAA DNS lookups, WHOIS, TLS on port 443, and relevant command suggestions.</td></tr>
+              <tr><th data-i18n="lens_url_h">URL</th><td data-i18n="lens_url_b">Open the URL in an external app. Depending on its host, scheme, and port, Lens may also offer DNS, WHOIS, IP, or TLS.</td></tr>
+              <tr><th data-i18n="lens_endpoint_h">Host and port</th><td data-i18n="lens_endpoint_b">When Lens recognizes a host and port, it uses that port for TLS and offers the usual lookups for the host.</td></tr>
+              <tr><th data-i18n="lens_local_h">Cron or POSIX permission</th><td data-i18n="lens_local_b">Explain the schedule or decode the permission locally.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="docs-note" data-i18n="lens_command_note">You can review and copy command suggestions. Lens does not send them to Shell.</p>
+
+        <h3 data-i18n="tools_catalog_title">Built-in tools</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th data-i18n="tool_h">Tool or input</th><th data-i18n="tool_behavior_h">What it does</th></tr></thead>
+            <tbody>
+              <tr><th data-i18n="tool_manual_h">Linux and C references</th><td data-i18n="tool_manual_b">Search the bundled command and function references and copy a command or function name exactly as shown. These tools do not contact a server.</td></tr>
+              <tr><th data-i18n="tool_ip_h">IP lookup</th><td data-i18n="tool_ip_b">Literal IP metadata uses the bundled offline database and can show country or region, ASN, organization name, and domain facts when present. Domain input is resolved with DNS first. On NAT64 networks, results may show both the resolved address and the address used for the database lookup.</td></tr>
+              <tr><th data-i18n="tool_dns_h">DNS</th><td data-i18n="tool_dns_b">Query A, AAAA, CNAME, MX, TXT, NS, SOA, CAA, SRV, PTR, or HTTPS records. Choose System default, Google, Cloudflare, AliDNS, DNSPod, or a custom resolver IP. System default follows Android's current network and Private DNS. The other choices send traditional unencrypted DNS directly to the selected resolver.</td></tr>
+              <tr><th data-i18n="tool_whois_h">WHOIS</th><td data-i18n="tool_whois_b">Domain, IP, and ASN input is detected automatically. WHOIS sends plaintext queries over port 43, first to IANA and then to the server named in the referral.</td></tr>
+              <tr><th data-i18n="tool_tls_h">TLS certificate</th><td data-i18n="tool_tls_b">Enter a host or host and port. The default port is 443. The address used for the connection is labeled as Target IP, Resolved IP, or Connection IP according to the input and network. Results also include the issuer, validity, key and signature algorithms, chain length, Subject Alternative Names, and SHA-256 fingerprint. The tool reads the certificate presented by the target. It does not verify hostname matching, the trust chain, or revocation status.</td></tr>
+              <tr><th data-i18n="tool_subnet_h">Subnet and permissions</th><td data-i18n="tool_subnet_b">Calculate IPv4 or IPv6 CIDR ranges and convert owner, group, and other permissions between symbolic and octal forms.</td></tr>
+              <tr><th data-i18n="tool_cron_h">Cron</th><td data-i18n="tool_cron_b">Build common minute, hour, day, or week schedules, or inspect a custom expression.</td></tr>
+              <tr><th data-i18n="tool_text_h">Text and number tools</th><td data-i18n="tool_text_b">Regex testing, timestamp conversion, base conversion, and password generation run locally on the device.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="docs-note" data-i18n="lens_input_note">Lens also recognizes a plain domain such as google.com.</p>
+      </section>
+
+      <section id="troubleshooting" class="docs-section">
+        <p class="docs-section-number">12</p>
+        <h2 data-i18n="troubleshooting_title">Troubleshooting</h2>
+
+        <div class="trouble-list">
+          <details>
+            <summary data-i18n="trouble_connect_q">A server will not connect</summary>
+            <p data-i18n="trouble_connect_a">Check the host, SSH port, username, authentication type, and selected bastion. Meows retries ordinary network and server failures automatically. If the saved password or private key is missing, invalid, or wrong, edit the server. If the saved authentication information is correct, check SSH access on the target server or bastion, fix it, then choose Retry connection.</p>
+          </details>
+          <details>
+            <summary data-i18n="trouble_key_q">A private key is rejected</summary>
+            <p data-i18n="trouble_key_a">Confirm that the pasted key belongs to the selected user and that its public key is authorized on the server. An encrypted private key also needs the matching passphrase. When changing authentication type, enter the new credential rather than leaving it blank.</p>
+          </details>
+          <details>
+            <summary data-i18n="trouble_speed_q">Upload and download still show loading</summary>
+            <p data-i18n="trouble_speed_a">Upload and download rates need two comparable samples from the same connection, so they may appear later than other data after connecting. If they never appear, the remote network counters may be unavailable or not comparable between samples.</p>
+          </details>
+          <details>
+            <summary data-i18n="trouble_metrics_q">The terminal works, but metrics are unavailable</summary>
+            <p data-i18n="trouble_metrics_a">On minimal systems or restricted accounts, Terminal may connect even when some or all metrics cannot be read. This does not mean the SSH connection failed. For a missing or incorrect value, see A metric is missing or looks wrong below.</p>
+          </details>
+          <details>
+            <summary data-i18n="trouble_docker_q">Docker is unavailable</summary>
+            <p data-i18n="trouble_docker_a">Log in with the same SSH account and confirm that Docker is installed, the daemon is running, and the account can run Docker without an interactive sudo prompt.</p>
+          </details>
+          <details>
+            <summary data-i18n="trouble_hostkey_q">The server host key changed</summary>
+            <p data-i18n="trouble_hostkey_a">First confirm why the server host key changed and rule out connecting to the wrong host. Open the host-key review from the affected server card, Shell, or tunnel configuration. Compare the SHA-256 fingerprint with the server console or another trusted source. If it matches, choose Trust new key. If only a password or login private key is wrong, edit the server instead.</p>
+          </details>
+          <details>
+            <summary data-i18n="trouble_background_q">Monitoring stops in the background</summary>
+            <p data-i18n="trouble_background_a">Enable Persistent Notification and remove battery restrictions for Meows. Force-stopping Meows or using a task cleaner that ends the app also stops local monitoring.</p>
+          </details>
+          <details>
+            <summary data-i18n="trouble_backup_q">A Drive backup cannot be restored</summary>
+            <p data-i18n="trouble_backup_a">If the backup is missing from the list, sign in to Meows with the Google account that created it and refresh. If it is listed but cannot be restored, enter the exact master password used when it was created. Meows cannot recover or reset that password.</p>
+          </details>
+          <details>
+            <summary data-i18n="trouble_lens_q">Lens does not offer an action</summary>
+            <p data-i18n="trouble_lens_a">Lens works only with supported text in ordinary Shell output and Docker logs. It is unavailable while a full-screen program is using the alternate screen. Unrecognized text remains ordinary output.</p>
+          </details>
+          <details>
+            <summary data-i18n="trouble_tunnel_q">A tunnel starts but the target is unreachable</summary>
+            <p data-i18n="trouble_tunnel_a">Start with the forwarding type. With Local forwarding, the SSH server must be able to reach the target. With Remote forwarding, the Android device must be able to reach it. Then verify Bind Port, Host Address, and Target Port, and check the network path from the side that reaches the target.</p>
+          </details>
+          <details>
+            <summary data-i18n="trouble_wrong_metric_q">A metric is missing or looks wrong</summary>
+            <p data-i18n="trouble_wrong_metric_a">Include the Meows version, Linux distribution and version, kernel version, architecture, the affected metric, what you expected, and steps to reproduce it. Remove hostnames, IP addresses, usernames, credentials, and keys from any command output or logs you attach.</p>
+            <p><span data-i18n="trouble_wrong_metric_contact">Email:</span> <a href="#" data-email="bWVAa3ZpdHJhLmNvbQ==" data-i18n="contact_reveal">Reveal email</a></p>
+            <p data-i18n="trouble_wrong_metric_followup">After I understand the environment, I may reply with a short diagnostic command for that case. Read it before running it, then send back only output that is safe to share.</p>
+          </details>
+        </div>
+
+      </section>
+
+      <nav class="docs-end-links" aria-label="Related pages" data-i18n-aria-label="related_label">
+        <a href="../" data-i18n="related_home">Home</a>
+        <a href="../privacy/" data-i18n="related_privacy">Privacy policy</a>
+        <a href="https://github.com/KeSaite/Meows" target="_blank" rel="noopener" data-i18n="related_github">Website source on GitHub</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <div class="footer-brand"><img src="../favicon.png" width="28" height="28" alt=""><span>Meows</span></div>
+      <p data-i18n="footer_note">Native Android app. SSH connections start on your device. Independently developed and maintained by Li Bainan.</p>
+    </div>
+  </footer>
+</body>
+</html>

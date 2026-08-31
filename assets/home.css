@@ -342,8 +342,8 @@ a {
 }
 
 .hero h1 {
-  max-width: 11.5ch;
-  font-size: clamp(3.25rem, 6.6vw, 6.25rem);
+  max-width: 12.5ch;
+  font-size: clamp(3.25rem, 5.6vw, 5.4rem);
 }
 
 
@@ -571,8 +571,8 @@ html:lang(zh-Hant) .hero h1 {
 
 .story-copy blockquote {
   margin: 36px 0 0;
-  padding: 20px 0 20px 24px;
-  border-left: 3px solid var(--rust);
+  max-width: 580px;
+  padding: 0;
   color: var(--ink);
   font-family: inherit;
   font-size: 1.18rem;
@@ -640,8 +640,18 @@ html:lang(zh-Hant) .hero h1 {
   border-top: 1px solid var(--line);
 }
 
-.feature-row:nth-of-type(3) {
+.feature-more {
   grid-template-columns: minmax(360px, .9fr) minmax(0, 1fr);
+}
+
+.feature-lens .lens-stack {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.feature-lens .feature-copy {
+  grid-column: 2;
+  grid-row: 1;
 }
 
 .feature-copy h3 {
@@ -654,7 +664,7 @@ html:lang(zh-Hant) .hero h1 {
   line-height: 1.12;
 }
 
-.feature-copy > p:not(.feature-label):not(.small-note) {
+.feature-copy > p:not(.feature-label) {
   max-width: 680px;
   margin: 24px 0 0;
   color: var(--muted);
@@ -715,17 +725,6 @@ html:lang(zh-Hant) .hero h1 {
   bottom: 0;
   z-index: 2;
   transform: rotate(1.5deg);
-}
-
-.small-note {
-  max-width: 620px;
-  margin: 30px 0 0;
-  padding: 18px 20px;
-  color: var(--ink);
-  background: var(--rust-soft);
-  border-left: 3px solid var(--rust);
-  border-radius: 0 4px 4px 0;
-  font-size: .94rem;
 }
 
 .command-strip {
@@ -989,7 +988,7 @@ footer {
 }
 
 :focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--rust) 60%, transparent);
+  outline: 3px solid var(--rust);
   outline-offset: 4px;
 }
 
@@ -1007,17 +1006,12 @@ footer {
     gap: 40px;
   }
 
-  .hero h1 {
-    font-size: clamp(3.15rem, 7vw, 5rem);
-  }
-
   .server-note {
     left: -20px;
     width: 184px;
   }
 
-  .feature-row,
-  .feature-row:nth-of-type(3) {
+  .feature-row {
     grid-template-columns: 1fr 1fr;
     gap: 54px;
   }
@@ -1075,18 +1069,19 @@ footer {
     gap: 62px;
   }
 
-  .feature-row,
-  .feature-row:nth-of-type(3) {
+  .feature-row {
     grid-template-columns: 1fr;
     gap: 64px;
   }
 
-  .feature-row:nth-of-type(3) .lens-stack {
-    order: 2;
+  .feature-lens .lens-stack {
+    grid-column: 1;
+    grid-row: 2;
   }
 
-  .feature-row:nth-of-type(3) .feature-copy {
-    order: 1;
+  .feature-lens .feature-copy {
+    grid-column: 1;
+    grid-row: 1;
   }
 
   .tilted-right,
@@ -1155,14 +1150,14 @@ footer {
   }
 
   .hero h1 {
-    font-size: clamp(2.75rem, 13vw, 4rem);
+    font-size: clamp(2.75rem, 13vw, 3.25rem);
   }
 
   html:lang(zh-Hans) .hero h1,
   html:lang(zh-Hant) .hero h1,
   html:lang(ja) .hero h1,
   html:lang(ko) .hero h1 {
-    font-size: clamp(2.65rem, 11.3vw, 3.2rem);
+    font-size: clamp(2.65rem, 11.3vw, 3rem);
   }
 
   .hero-actions {

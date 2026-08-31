@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
-  <title>Meows — SSH Monitor &amp; Terminal for Android</title>
+  <title>Meows</title>
   <meta name="description" content="Monitor Linux servers from Android over SSH. No agent, daemon, or extra port on the server. Includes live metrics, terminal, Docker, tunnels, and network tools.">
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="favicon.png">
@@ -14,12 +14,11 @@
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f0e7">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171411">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Meows — SSH Monitor &amp; Terminal for Android">
+  <meta property="og:title" content="Meows">
   <meta property="og:description" content="Monitor Linux servers from Android over SSH. No agent, daemon, or extra port on the server. Includes live metrics, terminal, Docker, tunnels, and network tools.">
   <meta property="og:url" content="https://app.kvitra.com/">
   <meta property="og:image" content="https://app.kvitra.com/assets/screenshots/en/overview.webp">
   <link rel="stylesheet" href="assets/home.css">
-  <script src="assets/utm.js" defer></script>
   <script src="assets/home-i18n.js" defer></script>
 </head>
 <body>
@@ -35,6 +34,7 @@
       <nav class="nav" aria-label="Primary navigation" data-i18n-aria-label="nav_label">
         <a href="#why" data-i18n="nav_why">Why I made it</a>
         <a href="#inside" data-i18n="nav_inside">Inside the app</a>
+        <a href="docs/" data-i18n="nav_docs">Manual</a>
         <a href="#questions" data-i18n="nav_questions">Questions</a>
       </nav>
 
@@ -82,7 +82,7 @@
             </button>
           </div>
         </div>
-        <a class="header-cta" data-play-link data-play-content="header_cta" href="https://play.google.com/store/apps/details?id=com.meows.android&amp;referrer=utm_source%3Dofficial_website%26utm_medium%3Dwebsite%26utm_campaign%3Dmeows_1_0_154%26utm_content%3Dheader_cta" target="_blank" rel="noopener" data-i18n="nav_get">Google Play</a>
+        <a class="header-cta" href="https://play.google.com/store/apps/details?id=com.meows.android&amp;referrer=utm_source%3Dofficial_website%26utm_medium%3Dreferral%26utm_campaign%3Dmeows_android_acquisition%26utm_content%3Dnav_cta" target="_blank" rel="noopener" data-i18n="nav_get">Google Play</a>
       </div>
     </div>
   </header>
@@ -92,21 +92,21 @@
       <div class="hero-copy">
         <p class="kicker" data-i18n="hero_kicker">Android · SSH only · no server agent</p>
         <h1 data-i18n="hero_title">I wanted to check a server without opening my laptop.</h1>
-        <p class="hero-lead" data-i18n="hero_body">That turned into Meows. Add an SSH host and the phone shows CPU, memory, disk, network, and the things I used to open a terminal to check.</p>
+        <p class="hero-lead" data-i18n="hero_body">That became Meows. Add a server to see CPU, memory, disk, network, and other details over SSH on your phone.</p>
 
         <div class="hero-actions">
-          <a class="play-badge" data-play-link data-play-content="hero_badge" href="https://play.google.com/store/apps/details?id=com.meows.android&amp;referrer=utm_source%3Dofficial_website%26utm_medium%3Dwebsite%26utm_campaign%3Dmeows_1_0_154%26utm_content%3Dhero_badge" target="_blank" rel="noopener">
+          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.meows.android&amp;referrer=utm_source%3Dofficial_website%26utm_medium%3Dreferral%26utm_campaign%3Dmeows_android_acquisition%26utm_content%3Dhero_cta" target="_blank" rel="noopener">
             <img data-play-badge src="assets/playbadge/en.svg" width="239" height="71" alt="Get it on Google Play">
           </a>
           <p class="purchase-note">
-            <strong data-i18n="hero_price">$4.99 once</strong>
+            <strong data-i18n="hero_price">One-time purchase</strong>
             <span data-i18n="hero_price_note">No subscription, ads, or in-app purchases</span>
           </p>
         </div>
 
         <dl class="hero-facts">
           <div><dt data-i18n="fact_server_label">Server side</dt><dd data-i18n="fact_server_value">Nothing to install</dd></div>
-          <div><dt data-i18n="fact_permission_label">Runtime permission</dt><dd data-i18n="fact_permission_value">Notifications only, and optional</dd></div>
+          <div><dt data-i18n="fact_permission_label">Runtime permission</dt><dd data-i18n="fact_permission_value">Notifications only, and you can decline</dd></div>
           <div><dt data-i18n="fact_languages_label">Interface</dt><dd data-i18n="fact_languages_value">English · 简体中文 · 繁體中文 · 日本語 · 한국어</dd></div>
         </dl>
       </div>
@@ -120,7 +120,7 @@
         </div>
         <figure class="phone-shot hero-phone">
           <img data-shot="overview" src="assets/screenshots/en/overview.webp" width="1002" height="2048" alt="Meows overview with a world map and a server card" fetchpriority="high">
-          <figcaption data-i18n="hero_caption">The 1.0.154 overview: a world map first, then the live server cards.</figcaption>
+          <figcaption data-i18n="hero_caption">The overview starts with a world map, followed by live server cards.</figcaption>
         </figure>
       </div>
     </section>
@@ -130,14 +130,14 @@
         <p class="section-number">01</p>
         <h2 data-i18n="story_title">A few small VPSs were already enough to make this annoying.</h2>
         <p data-i18n="story_p1">I used to SSH into them one by one just to see whether CPU, memory, or disk looked wrong. A lot of monitoring setups also wanted another daemon, another port, or a separate dashboard.</p>
-        <p data-i18n="story_p2">These are small machines, and I did not want to change the server environment just to watch it. Meows uses the SSH access that is already there and reads the usual Linux interfaces from the client.</p>
+        <p data-i18n="story_p2">These are small machines, and I did not want to change their setup just to monitor them. Meows uses the SSH access already there and reads the system information Linux provides over that connection.</p>
         <blockquote data-i18n="story_quote">I did not want another agent running just so I could look at the status.</blockquote>
       </div>
 
       <dl class="connection-ledger">
         <div><dt data-i18n="connection_path_label">Connection</dt><dd><code data-i18n="connection_path_value">Android device → SSH → server</code></dd></div>
         <div><dt data-i18n="connection_server_label">Server side</dt><dd data-i18n="connection_server_value">No agent and no extra management port</dd></div>
-        <div><dt data-i18n="connection_auth_label">Authentication</dt><dd data-i18n="connection_auth_value">Password, private key, or bastion host</dd></div>
+        <div><dt data-i18n="connection_auth_label">Sign-in and route</dt><dd data-i18n="connection_auth_value">Password or private key, directly or through a bastion</dd></div>
         <div><dt data-i18n="connection_middle_label">In between</dt><dd data-i18n="connection_middle_value">No Meows relay or analytics backend</dd></div>
       </dl>
     </section>
@@ -146,14 +146,14 @@
       <div class="section-intro">
         <p class="section-number">02</p>
         <h2 data-i18n="inside_title">What I use on my own servers.</h2>
-        <p data-i18n="inside_lead">Most of it came from something I kept checking or looking up, then stayed in the app.</p>
+        <p data-i18n="inside_lead">Each part came from something I kept checking or looking up while managing my own servers.</p>
       </div>
 
       <article class="feature-row feature-monitor">
         <div class="feature-copy">
           <p class="feature-label" data-i18n="monitor_label">Monitoring</p>
           <h3 data-i18n="monitor_title">When a curve looks wrong, I want the process or device beside it.</h3>
-          <p data-i18n="monitor_body">CPU, memory, disk, network, and TCP history are shown with the processes, mounts, or interfaces behind the number. Alerts are set per server; several thresholds crossing at once are merged into one notification.</p>
+          <p data-i18n="monitor_body">CPU, memory, disk, network, and TCP history are shown with the processes, mounts, or interfaces behind the number. Alerts are set per server. If several thresholds are crossed at once, Meows merges them into one notification.</p>
           <ul class="plain-list">
             <li data-i18n="monitor_1">Live cards for all of my servers</li>
             <li data-i18n="monitor_2">Processes, mounts, and interfaces under the history chart</li>
@@ -162,11 +162,17 @@
         </div>
         <figure class="phone-shot tilted-right">
           <img data-shot="charts" src="assets/screenshots/en/charts.webp" width="1002" height="2048" loading="lazy" alt="Meows history charts and process details">
-          <figcaption data-i18n="monitor_caption">History stays on the phone; the detail under the chart helps explain the spike.</figcaption>
+          <figcaption data-i18n="monitor_caption">History stays on the phone. The detail under the chart helps explain the spike.</figcaption>
         </figure>
       </article>
 
       <article class="feature-row feature-lens">
+        <div class="feature-copy">
+          <p class="feature-label" data-i18n="lens_label">Terminal + Lens</p>
+          <h3 data-i18n="lens_title">Seeing a domain in a log and then jumping to a separate tool got old.</h3>
+          <p data-i18n="lens_body">That is why I added Meows Lens. Tap an IP address, domain, URL, or permission string in the terminal or a Docker log, then choose the matching DNS, WHOIS, TLS, or permission action.</p>
+          <p data-i18n="lens_note">Lens does not run a lookup, open a page, or execute a command on its own. You choose what to do.</p>
+        </div>
         <div class="lens-stack" aria-label="Meows tools and Lens" data-i18n-aria-label="lens_stack_aria">
           <figure class="phone-shot phone-back">
             <img data-shot="tools" src="assets/screenshots/en/tools.webp" width="1002" height="2048" loading="lazy" alt="Meows network and Linux tools">
@@ -175,18 +181,12 @@
             <img data-shot="lens" src="assets/screenshots/en/lens.webp" width="1002" height="2048" loading="lazy" alt="Meows Lens actions for a selected address">
           </figure>
         </div>
-        <div class="feature-copy">
-          <p class="feature-label" data-i18n="lens_label">Terminal + Lens</p>
-          <h3 data-i18n="lens_title">Seeing a domain in a log and then jumping to a separate tool got old.</h3>
-          <p data-i18n="lens_body">That is why I added Meows Lens. An IP, domain, URL, or permission string in the terminal or Docker log can be opened where it appears, then passed to DNS, WHOIS, TLS, or the permission calculator.</p>
-          <p class="small-note" data-i18n="lens_note">Nothing runs by itself. Lens shows the available action and waits for a tap.</p>
-        </div>
       </article>
 
       <article class="feature-row feature-more">
         <div class="feature-copy">
           <p class="feature-label" data-i18n="more_label">Other tools</p>
-          <h3 data-i18n="more_title">Docker, tunnels, and the small tools I used to search for each time.</h3>
+          <h3 data-i18n="more_title">Docker, tunnels, and the small tools I kept looking up elsewhere.</h3>
           <p data-i18n="more_body">Docker management also goes through SSH, so there is no remote API port to expose. The app also has SSH tunnels, bastion hosts, DNS, TLS, WHOIS, subnet, Cron, regex, timestamp, permission tools, and more.</p>
           <div class="command-strip" aria-label="Command examples" data-i18n-aria-label="examples_aria">
             <code>docker logs -f</code>
@@ -202,7 +202,7 @@
               <li>SSH terminal</li>
               <li>Docker</li>
               <li>SSH tunnels</li>
-              <li data-i18n="tool_jump">Jump hosts</li>
+              <li data-i18n="tool_jump">Bastion hosts</li>
             </ul>
             <ul>
               <li>DNS / WHOIS / TLS</li>
@@ -220,14 +220,14 @@
         <div>
           <p class="section-number light">03</p>
           <h2 data-i18n="privacy_title">The app stores SSH passwords and private keys. I did not want to cut corners here.</h2>
-          <p class="privacy-lead" data-i18n="privacy_body">Credentials are encrypted on the device with AES-GCM and Android Keystore. Meows has no service that receives monitoring data. The only runtime permission is notifications; the rest of the app still works if it is denied.</p>
+          <p class="privacy-lead" data-i18n="privacy_body">Credentials are encrypted on the device with AES-GCM and Android Keystore. Meows has no service that receives monitoring data. The only runtime permission is notifications. Declining it does not disable the rest of the app.</p>
           <a class="text-link" href="privacy/" data-i18n="privacy_link">Read the privacy policy →</a>
         </div>
         <dl class="privacy-ledger">
-          <div><dt data-i18n="privacy_q1">SSH credentials</dt><dd data-i18n="privacy_a1">Encrypted on the device with AES-GCM; the keys are held by Android Keystore.</dd></div>
+          <div><dt data-i18n="privacy_q1">SSH credentials</dt><dd data-i18n="privacy_a1">Encrypted on the device with AES-GCM. Android Keystore holds the keys.</dd></div>
           <div><dt data-i18n="privacy_q2">Monitoring data</dt><dd data-i18n="privacy_a2">Kept on the phone. Meows has no service that receives it.</dd></div>
-          <div><dt data-i18n="privacy_q3">Connection path</dt><dd data-i18n="privacy_a3">The phone connects directly to the servers you added over SSH.</dd></div>
-          <div><dt data-i18n="privacy_q4">Optional backup</dt><dd data-i18n="privacy_a4">Encrypted locally before it is uploaded to Google Drive app-private storage.</dd></div>
+          <div><dt data-i18n="privacy_q3">Connection path</dt><dd data-i18n="privacy_a3">SSH connections start on the phone and go to the servers or bastion hosts you configure.</dd></div>
+          <div><dt data-i18n="privacy_q4">Optional backup</dt><dd data-i18n="privacy_a4">Encrypted on the device before it is uploaded to Meows' hidden app data folder in Google Drive.</dd></div>
         </dl>
       </div>
     </section>
@@ -241,8 +241,8 @@
       <div class="maker-copy">
         <p class="section-number">04</p>
         <h2 data-i18n="maker_title">My own servers do not cover all of these Linux environments.</h2>
-        <p data-i18n="maker_p1">Meows only uses SSH, so the compatibility work lands in the client. Old kernels, stripped-down systems, and less common architectures are hard to cover with the machines I own. During 1.0.154, a few people on LowEndTalk gave me real environments to test against; the metric collector and history charts were reworked there.</p>
-        <p data-i18n="maker_p2">The acknowledgements page keeps the names of people who helped during testing. Each one has a different paw avatar.</p>
+        <p data-i18n="maker_p1">Because Meows only uses SSH, the Android app has to handle differences between Linux systems. I cannot cover old kernels, stripped-down systems, and uncommon architectures with the machines I own. People on LowEndTalk let me test against more real servers, which led to changes in metric collection and history charts.</p>
+        <p data-i18n="maker_p2">I kept the names of those testers on the acknowledgements page, with a different paw avatar for each person.</p>
         <p class="signature" aria-label="Li Bainan"><span>—</span> Li Bainan</p>
       </div>
     </section>
@@ -250,21 +250,21 @@
     <section class="faq shell" id="questions">
       <div class="section-intro compact">
         <p class="section-number">05</p>
-        <h2 data-i18n="faq_title">A few things people usually ask before buying.</h2>
+        <h2 data-i18n="faq_title">Questions before buying.</h2>
       </div>
 
       <div class="faq-list">
         <details>
           <summary data-i18n="q1">Do I need to install anything on the server?</summary>
-          <p data-i18n="a1">No. Meows reads the server over standard SSH. There is no agent, daemon, Docker image or extra port to configure.</p>
+          <p data-i18n="a1">No. Meows reads the server over standard SSH. There is no agent, daemon, Docker image, or extra port to configure.</p>
         </details>
         <details>
           <summary data-i18n="q2">Can it reach an internal server?</summary>
-          <p data-i18n="a2">Yes. Add a bastion host and monitoring, terminal sessions and SSH tunnels can all use it.</p>
+          <p data-i18n="a2">Yes. Add a bastion host, and Meows can use it for monitoring, terminal sessions, and SSH tunnels.</p>
         </details>
         <details>
           <summary data-i18n="q3">Which Android version and languages?</summary>
-          <p data-i18n="a3">Android 14 or later. The interface supports English, Simplified Chinese, Traditional Chinese, Japanese and Korean.</p>
+          <p data-i18n="a3">Android 14 or later. The interface supports English, Simplified Chinese, Traditional Chinese, Japanese, and Korean.</p>
         </details>
         <details>
           <summary data-i18n="q4">Is there an iOS version?</summary>
@@ -276,10 +276,10 @@
     <section class="final-cta shell">
       <div>
         <p class="kicker" data-i18n="final_kicker">Android 14+</p>
-        <h2 data-i18n="final_title">Add an SSH host and it is ready.</h2>
-        <p data-i18n="final_body">$4.99 once. Updates are included; there is no subscription, advertising, or telemetry.</p>
+        <h2 data-i18n="final_title">Add a server to start monitoring.</h2>
+        <p data-i18n="final_body">One-time purchase. Updates are included, with no subscription, ads, or telemetry.</p>
       </div>
-      <a class="play-badge final-play-badge" data-play-link data-play-content="final_badge" href="https://play.google.com/store/apps/details?id=com.meows.android&amp;referrer=utm_source%3Dofficial_website%26utm_medium%3Dwebsite%26utm_campaign%3Dmeows_1_0_154%26utm_content%3Dfinal_badge" target="_blank" rel="noopener">
+      <a class="play-badge final-play-badge" href="https://play.google.com/store/apps/details?id=com.meows.android&amp;referrer=utm_source%3Dofficial_website%26utm_medium%3Dreferral%26utm_campaign%3Dmeows_android_acquisition%26utm_content%3Dfinal_cta" target="_blank" rel="noopener">
         <img data-play-badge src="assets/playbadge/en.svg" width="239" height="71" alt="Get it on Google Play">
       </a>
     </section>
@@ -288,8 +288,9 @@
   <footer>
     <div class="shell footer-inner">
       <div class="footer-brand"><img src="favicon.png" width="28" height="28" alt=""><span>Meows</span></div>
-      <p data-i18n="footer_note">Native Android, direct SSH. Built and maintained by Li Bainan.</p>
+      <p data-i18n="footer_note">Native Android app. SSH connections start on your device. Independently developed and maintained by Li Bainan.</p>
       <div class="footer-links">
+        <a href="docs/" data-i18n="footer_docs">Manual</a>
         <a href="privacy/" data-i18n="footer_privacy">Privacy</a>
         <a href="https://github.com/KeSaite/Meows" target="_blank" rel="noopener">GitHub</a>
       </div>

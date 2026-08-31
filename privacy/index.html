@@ -4,23 +4,79 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Privacy Policy</title>
-<meta name="description" content="Meows privacy policy. Your data stays on your device; Meows has no backend of its own.">
+<title>Privacy Policy — Meows</title>
+<meta name="description" content="How Meows handles SSH credentials, monitoring data, optional backups, and user-triggered network tools.">
 <link rel="icon" href="../favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="../favicon.png">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="canonical" href="https://app.kvitra.com/privacy/">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FBF7F2">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141210">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f0e7">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171411">
 <style>
   body { min-height: 100vh; padding: 0; line-height: 1.75; }
+  .skip-link {
+    position: fixed; inset: 10px auto auto 10px; z-index: 100;
+    padding: 8px 12px; color: var(--on-primary); background: var(--text);
+    border-radius: 8px; transform: translateY(-180%); transition: transform .2s ease;
+  }
+  .skip-link:focus { transform: translateY(0); }
+  .privacy-header {
+    position: sticky; top: 0; z-index: 50;
+    border-bottom: 1px solid var(--border); background: var(--bg);
+  }
+  .privacy-header-inner {
+    width: min(var(--shell), calc(100% - 48px)); min-height: 72px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
   .back {
-    width: min(880px, calc(100% - 48px)); margin: 0 auto; padding: 30px 0 22px;
-    display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border);
-    color: var(--text); font-weight: 700; font-size: 14px;
+    display: flex; align-items: center; gap: 10px;
+    color: var(--text); font-weight: 760; font-size: 1rem; letter-spacing: -.02em;
   }
   .back:hover { text-decoration: none; color: var(--primary); }
   .back img { width: 28px; height: 28px; }
+  .language-switcher { position: relative; line-height: 1.4; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+  .language-trigger {
+    min-width: 122px; height: 38px; display: inline-flex; align-items: center;
+    justify-content: space-between; gap: 12px; padding: 0 12px 0 13px;
+    border: 1px solid var(--border); border-radius: 9px; color: var(--muted);
+    background: color-mix(in srgb, var(--surface) 76%, transparent); cursor: pointer;
+    font: inherit; transition: border-color .16s ease, background-color .16s ease, color .16s ease;
+  }
+  .language-trigger:hover,
+  .language-trigger[aria-expanded="true"] {
+    border-color: color-mix(in srgb, var(--primary) 58%, var(--border));
+    color: var(--text); background: var(--surface);
+  }
+  .language-current-code { display: none; min-width: 1.5em; text-align: center; font-weight: 740; }
+  .language-chevron {
+    width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent;
+    border-top: 5px solid currentColor; transform: translateY(1px); transition: transform .16s ease;
+  }
+  .language-trigger[aria-expanded="true"] .language-chevron { transform: translateY(-1px) rotate(180deg); }
+  .language-menu {
+    position: absolute; top: calc(100% + 9px); right: 0; z-index: 80; width: 218px;
+    padding: 6px; border: 1px solid var(--border); border-radius: 12px;
+    background: var(--surface); box-shadow: var(--shadow);
+  }
+  .language-menu[hidden] { display: none; }
+  .language-option {
+    width: 100%; min-height: 42px; display: grid; grid-template-columns: 1fr auto 12px;
+    align-items: center; gap: 12px; padding: 0 10px 0 11px; border: 0; border-radius: 8px;
+    color: var(--text); background: transparent; text-align: left; cursor: pointer; font: inherit;
+  }
+  .language-option:hover,
+  .language-option:focus-visible { background: var(--primary-weak); }
+  .language-option[aria-selected="true"] { color: var(--primary); background: var(--primary-weak); font-weight: 710; }
+  .language-option-code { color: var(--muted); font-size: .72rem; font-weight: 720; letter-spacing: .04em; }
+  .language-option::after {
+    content: ""; width: 8px; height: 4px; border-left: 1.7px solid currentColor;
+    border-bottom: 1.7px solid currentColor; opacity: 0; transform: translateY(-1px) rotate(-45deg);
+  }
+  .language-option[aria-selected="true"]::after { opacity: 1; }
   .container { width: min(880px, calc(100% - 48px)); margin: 0 auto; padding: 62px 0 96px; }
   h1 { max-width: 720px; margin-bottom: 12px; font-size: clamp(40px, 7vw, 68px); line-height: 1.02; letter-spacing: -.045em; }
   .updated { color: var(--muted); font-size: 13px; margin-bottom: 34px; }
@@ -32,76 +88,123 @@
   p { margin-bottom: 14px; }
   ul { max-width: 790px; margin: 0 0 16px; padding-left: 22px; }
   li { margin-bottom: 9px; }
-  .contact { margin-top: 52px; padding: 2px 0 2px 22px; border-left: 3px solid var(--primary); }
-  .contact h2 { margin-top: 0; padding-top: 0; border-top: 0; }
-  a:focus-visible { outline: 3px solid color-mix(in srgb, var(--primary) 38%, transparent); outline-offset: 4px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--primary); outline-offset: 4px; }
+  @media (max-width: 820px) {
+    .privacy-header-inner { width: min(100% - 34px, var(--shell)); min-height: 64px; }
+  }
   @media (max-width: 560px) {
-    .back, .container { width: min(100% - 36px, 880px); }
-    .back { padding-top: 22px; }
+    .container { width: min(100% - 36px, 880px); }
+    .language-trigger { min-width: 56px; padding-inline: 11px; gap: 9px; }
+    .language-current-label { display: none; }
+    .language-current-code { display: inline; }
+    .language-menu { width: min(218px, calc(100vw - 34px)); }
     .container { padding: 46px 0 72px; }
     h1 { font-size: clamp(38px, 12vw, 54px); }
     h2 { margin-top: 40px; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .skip-link, .language-trigger, .language-chevron { transition: none; }
+  }
 </style>
 </head>
 <body>
-<a class="back" href="../"><img src="../favicon.png" alt=""><span data-i18n="back">Meows</span></a>
-<div class="container">
+<a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+<header class="privacy-header">
+  <div class="privacy-header-inner">
+    <a class="back" href="../" aria-label="Meows home" data-i18n-aria-label="brand_home"><img src="../favicon.png" alt=""><span data-i18n="back">Meows</span></a>
+    <div class="language-switcher" data-language-switcher>
+      <span class="sr-only" id="language-label" data-i18n="language_label">Language</span>
+      <button class="language-trigger" type="button" data-language-trigger
+              aria-haspopup="listbox" aria-expanded="false"
+              aria-controls="language-menu" aria-label="Language: English">
+        <span class="language-current-label" data-language-current-label>English</span>
+        <span class="language-current-code" data-language-current-code aria-hidden="true">EN</span>
+        <span class="language-chevron" aria-hidden="true"></span>
+      </button>
+      <div class="language-menu" id="language-menu" role="listbox"
+           data-language-menu aria-labelledby="language-label" hidden>
+        <button class="language-option" type="button" role="option" data-language-choice="auto" aria-selected="true">
+          <span data-i18n="language_auto">Browser language</span><span class="language-option-code">AUTO</span>
+        </button>
+        <button class="language-option" type="button" role="option" data-language-choice="en" aria-selected="false">
+          <span>English</span><span class="language-option-code">EN</span>
+        </button>
+        <button class="language-option" type="button" role="option" data-language-choice="zhCN" aria-selected="false">
+          <span>简体中文</span><span class="language-option-code">简</span>
+        </button>
+        <button class="language-option" type="button" role="option" data-language-choice="zhTW" aria-selected="false">
+          <span>繁體中文</span><span class="language-option-code">繁</span>
+        </button>
+        <button class="language-option" type="button" role="option" data-language-choice="ja" aria-selected="false">
+          <span>日本語</span><span class="language-option-code">日</span>
+        </button>
+        <button class="language-option" type="button" role="option" data-language-choice="ko" aria-selected="false">
+          <span>한국어</span><span class="language-option-code">한</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+<main id="main" class="container">
   <h1 data-i18n="h1">Privacy Policy</h1>
-  <p class="updated" data-i18n="updated">Last updated: August 20, 2026</p>
+  <p class="updated" data-i18n="updated">Last updated: August 28, 2026</p>
 
-  <p data-i18n="intro">Meows is a native Android app that connects directly to servers over SSH. Server settings, credentials, and monitoring history are stored on your device. If you turn on Google Drive backup, the backup is encrypted on the device before it is uploaded to the app-private storage area.</p>
+  <p data-i18n="intro">Meows is a native Android app that opens SSH connections from your device to servers or bastion hosts you configure. Server settings, credentials, and monitoring history are stored on your device. Backups created in the current format are encrypted on the device before they are uploaded to Meows' hidden app data folder in Google Drive.</p>
 
   <h2 data-i18n="collect_h">Information Stored</h2>
-  <p data-i18n="collect_p">Everything below is kept locally on your device:</p>
+  <p data-i18n="collect_p">Meows stores the following information on your device:</p>
   <ul>
     <li data-i18n="collect_1"><strong>Server connection details:</strong> SSH host, port, username, and your password or private key (encrypted).</li>
     <li data-i18n="collect_2"><strong>Monitoring data:</strong> performance metrics (CPU, memory, disk, network, TCP connections) read from the servers you add.</li>
     <li data-i18n="collect_3"><strong>Your settings:</strong> alert thresholds, notification preferences, and app options you configure.</li>
+    <li data-i18n="collect_4"><strong>Google account details for Cloud Backup:</strong> account ID, email address, and, when Google provides them, display name and profile image URL. These stay on your device until you sign out.</li>
   </ul>
 
   <h2 data-i18n="use_h">How the Data Is Used</h2>
   <ul>
-    <li data-i18n="use_1">To open SSH connections to the servers you add.</li>
+    <li data-i18n="use_1">To open SSH connections to servers or bastion hosts you configure.</li>
     <li data-i18n="use_2">To show live status and history charts.</li>
     <li data-i18n="use_3">To raise notifications when a threshold is crossed or a server goes offline. This is handled entirely on your device. There is no push server.</li>
-    <li data-i18n="use_4">To create or restore an optional encrypted backup in Google Drive app-private storage, only after you sign in and choose to use it.</li>
+    <li data-i18n="use_4">To create an optional encrypted backup in Meows' hidden app data folder in Google Drive, or restore a backup shown in Meows, after you sign in and choose to use the feature.</li>
     <li data-i18n="use_5">To show the geographic location of server IP addresses, using an offline database.</li>
+    <li data-i18n="use_6">To run DNS, WHOIS, or TLS queries, or open an external URL, only when you start that action.</li>
+    <li data-i18n="use_7">To check from a monitored server whether the services shown on its server card are available. These checks begin after monitoring succeeds.</li>
   </ul>
 
   <h2 data-i18n="security_h">Storage &amp; Security</h2>
   <ul>
-    <li data-i18n="security_1">Passwords and private keys are encrypted with AES-GCM using keys held in the Android Keystore. An optional master password adds a second layer.</li>
-    <li data-i18n="security_2">Server settings and monitoring data are stored locally. Optional backups are encrypted on the device before upload.</li>
-    <li data-i18n="security_3">Monitoring data is kept only for a short rolling window on your device, then removed automatically.</li>
-    <li data-i18n="security_4">No monitoring data is sent to any external server.</li>
-    <li data-i18n="security_5">SSH connections go directly from your device to your servers.</li>
+    <li data-i18n="security_1">Passwords and private keys are encrypted with AES-GCM using keys held in the Android Keystore. A backup master password applies only to backup files.</li>
+    <li data-i18n="security_2">Monitoring history stays on your device and is not included in backups. Optional backups include server and bastion settings and credentials, tunnels, alert thresholds, the global refresh interval, theme, language, privacy mode, persistent notification setting, terminal font and size, and card badge visibility. They are encrypted on the device before upload.</li>
+    <li data-i18n="security_4">Monitoring data is not sent to a Meows service or any other third party.</li>
+    <li data-i18n="security_5">SSH connections originate on your device and go only to servers or bastion hosts you configure.</li>
   </ul>
 
   <h2 data-i18n="third_h">Third-Party Services</h2>
-  <p data-i18n="third_p">Meows has no backend of its own. One optional online integration and one bundled database involve third-party services or data:</p>
+  <p data-i18n="third_p">Meows does not run a backend. Only the following features use an external service or bundled data:</p>
   <ul>
-    <li><span data-i18n="third_drive">Google Drive API: optional backup, restore, and deletion. It is used only after you sign in and grant consent. Backups are encrypted on the device and stored in Google Drive app-private storage; they are managed from Meows.</span> <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" data-i18n="third_drive_link">Google Privacy Policy</a>.</li>
-    <li data-i18n="third_geoip"><strong>Offline IP database:</strong> an IPInfo Lite database bundled inside the app provides IP geolocation. Lookups happen on your device; nothing is sent to any geolocation service.</li>
+    <li><span data-i18n="third_drive">Google Drive API: optional backup, restore, and deletion. Meows uses it only after you sign in and grant consent, and keeps the selected Google account details on your device until you sign out. New backups are encrypted on the device and stored in Google Drive's hidden app data folder, so they do not appear in the ordinary Drive file list. Their cat names and short codes are display names used only in Meows. Through v1.0.159, Meows can also list, restore, or delete legacy backups it created in the ordinary Meows Backups folder.</span> <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" data-i18n="third_drive_link">Google Privacy Policy</a>.</li>
+    <li data-i18n="third_unlock">After monitoring succeeds, Meows may check the services listed on the server card from that server. The result stays on your device, and the requests do not pass through a Meows backend.</li>
+    <li data-i18n="third_tools">User-triggered network tools: DNS, WHOIS, and TLS contact the resolver or endpoint needed for a query only when you run it. URLs open in another app. None of these actions passes through a Meows service.</li>
+    <li data-i18n="third_geoip"><strong>Offline IP database:</strong> an IPInfo Lite database bundled inside the app provides IP geolocation. Lookups happen on your device. Nothing is sent to any geolocation service.</li>
   </ul>
 
-  <h2 data-i18n="not_h">What I Do Not Do</h2>
+  <h2 data-i18n="not_h">What Meows Does Not Do</h2>
   <ul>
-    <li data-i18n="not_1">I do not sell, rent or trade your information.</li>
-    <li data-i18n="not_2">I do not share your credentials or monitoring data with anyone.</li>
-    <li data-i18n="not_3">I do not collect analytics, usage statistics, or any device identifier.</li>
-    <li data-i18n="not_4">I do not show advertisements.</li>
+    <li data-i18n="not_1">Meows does not sell, rent, or trade your information.</li>
+    <li data-i18n="not_3">Meows does not collect analytics, usage statistics, or device identifiers.</li>
+    <li data-i18n="not_4">Meows does not show advertisements.</li>
   </ul>
 
   <h2 data-i18n="perm_h">Permissions</h2>
-  <p data-i18n="perm_p1">Meows requests a single runtime permission (notifications), and only so it can alert you. You can deny it and keep using the app; you simply will not receive notification alerts.</p>
+  <p data-i18n="perm_p1">Meows asks only for notification permission. You can deny it and keep using the rest of the app, but Meows will not be able to send alerts.</p>
   <p data-i18n="perm_p2">You can also turn on an optional privacy mode that hides Meows from the recent-apps screen and blocks screenshots and screen recording.</p>
 
   <h2 data-i18n="rights_h">Your Choices</h2>
   <ul>
     <li data-i18n="rights_1">Review, restore, or delete an optional Google Drive backup from Meows.</li>
-    <li data-i18n="rights_2">Delete local app data by removing servers or uninstalling Meows.</li>
-    <li data-i18n="rights_3">Turn features such as notifications or backup on or off at any time.</li>
+    <li data-i18n="rights_2">Remove a server to delete its settings and history. Uninstall Meows to delete all local app data.</li>
+    <li data-i18n="rights_3">Choose whether to allow notifications, use Cloud Backup, enable Persistent Notification, or turn on Privacy Mode. Signing out removes the saved Google account details from this device.</li>
     <li data-i18n="rights_4">Choose which servers are monitored.</li>
   </ul>
 
@@ -113,308 +216,335 @@
   </ul>
 
   <h2 data-i18n="children_h">Children's Privacy</h2>
-  <p data-i18n="children_p">Meows is not intended for children under 13, and I do not knowingly collect information from children.</p>
+  <p data-i18n="children_p">Meows is not intended for children under 13 and does not knowingly collect information from children.</p>
 
   <h2 data-i18n="changes_h">Changes to This Policy</h2>
-  <p data-i18n="changes_p">I may update this policy from time to time. Any change will be reflected in the "Last updated" date above.</p>
+  <p data-i18n="changes_p">If this policy changes, the "Last updated" date above will change with it.</p>
 
   <div class="contact">
     <h2 data-i18n="contact_h">Contact</h2>
-    <p data-i18n="contact_p">If you have any questions about this policy, please get in touch:</p>
+    <p data-i18n="contact_p">For questions about this policy:</p>
     <p><strong data-i18n="contact_label">Email:</strong> <a id="email-link" href="#" data-email="bWVAa3ZpdHJhLmNvbQ==" data-i18n="contact_reveal">Reveal email</a></p>
   </div>
-</div>
+</main>
 
 <script src="../assets/i18n.js"></script>
+<script src="../assets/contact.js"></script>
 <script>
   const I18N = Object.freeze({
   "en": {
     "back": "Meows",
+    "brand_home": "Meows home",
+    "skip": "Skip to content",
+    "language_auto": "Browser language",
+    "language_label": "Language",
     "h1": "Privacy Policy",
-    "updated": "Last updated: August 20, 2026",
-    "intro": "Meows is a native Android app that connects directly to servers over SSH. Server settings, credentials, and monitoring history are stored on your device. If you turn on Google Drive backup, the backup is encrypted on the device before it is uploaded to the app-private storage area.",
+    "updated": "Last updated: August 28, 2026",
+    "intro": "Meows is a native Android app that opens SSH connections from your device to servers or bastion hosts you configure. Server settings, credentials, and monitoring history are stored on your device. Backups created in the current format are encrypted on the device before they are uploaded to Meows' hidden app data folder in Google Drive.",
     "collect_h": "Information Stored",
-    "collect_p": "Everything below is kept locally on your device:",
+    "collect_p": "Meows stores the following information on your device:",
     "collect_1": "Server connection details: SSH host, port, username, and your password or private key (encrypted).",
     "collect_2": "Monitoring data: performance metrics (CPU, memory, disk, network, TCP connections) read from the servers you add.",
     "collect_3": "Your settings: alert thresholds, notification preferences, and app options you configure.",
+    "collect_4": "Google account details for Cloud Backup: account ID, email address, and, when Google provides them, display name and profile image URL. These stay on your device until you sign out.",
     "use_h": "How the Data Is Used",
-    "use_1": "To open SSH connections to the servers you add.",
+    "use_1": "To open SSH connections to servers or bastion hosts you configure.",
     "use_2": "To show live status and history charts.",
     "use_3": "To raise notifications when a threshold is crossed or a server goes offline. This is handled entirely on your device. There is no push server.",
-    "use_4": "To create or restore an optional encrypted backup in Google Drive app-private storage, only after you sign in and choose to use it.",
+    "use_4": "To create an optional encrypted backup in Meows' hidden app data folder in Google Drive, or restore a backup shown in Meows, after you sign in and choose to use the feature.",
     "use_5": "To show the geographic location of server IP addresses, using an offline database.",
+    "use_6": "To run DNS, WHOIS, or TLS queries, or open an external URL, only when you start that action.",
+    "use_7": "To check from a monitored server whether the services shown on its server card are available. These checks begin after monitoring succeeds.",
     "security_h": "Storage & Security",
-    "security_1": "Passwords and private keys are encrypted with AES-GCM using keys held in the Android Keystore. An optional master password adds a second layer.",
-    "security_2": "Server settings and monitoring data are stored locally. Optional backups are encrypted on the device before upload.",
-    "security_3": "Monitoring data is kept only for a short rolling window on your device, then removed automatically.",
-    "security_4": "No monitoring data is sent to any external server.",
-    "security_5": "SSH connections go directly from your device to your servers.",
+    "security_1": "Passwords and private keys are encrypted with AES-GCM using keys held in the Android Keystore. A backup master password applies only to backup files.",
+    "security_2": "Monitoring history stays on your device and is not included in backups. Optional backups include server and bastion settings and credentials, tunnels, alert thresholds, the global refresh interval, theme, language, privacy mode, persistent notification setting, terminal font and size, and card badge visibility. They are encrypted on the device before upload.",
+    "security_4": "Monitoring data is not sent to a Meows service or any other third party.",
+    "security_5": "SSH connections originate on your device and go only to servers or bastion hosts you configure.",
     "third_h": "Third-Party Services",
-    "third_p": "Meows has no backend of its own. One optional online integration and one bundled database involve third-party services or data:",
-    "third_drive": "Google Drive API: optional backup, restore, and deletion. It is used only after you sign in and grant consent. Backups are encrypted on the device and stored in Google Drive app-private storage; they are managed from Meows.",
-    "third_geoip": "Offline IP database: an IPInfo Lite database bundled inside the app provides IP geolocation. Lookups happen on your device; nothing is sent to any geolocation service.",
-    "not_h": "What I Do Not Do",
-    "not_1": "I do not sell, rent or trade your information.",
-    "not_2": "I do not share your credentials or monitoring data with anyone.",
-    "not_3": "I do not collect analytics, usage statistics, or any device identifier.",
-    "not_4": "I do not show advertisements.",
+    "third_p": "Meows does not run a backend. Only the following features use an external service or bundled data:",
+    "third_drive": "Google Drive API: optional backup, restore, and deletion. Meows uses it only after you sign in and grant consent, and keeps the selected Google account details on your device until you sign out. New backups are encrypted on the device and stored in Google Drive's hidden app data folder, so they do not appear in the ordinary Drive file list. Their cat names and short codes are display names used only in Meows. Through v1.0.159, Meows can also list, restore, or delete legacy backups it created in the ordinary Meows Backups folder.",
+    "third_unlock": "After monitoring succeeds, Meows may check the services listed on the server card from that server. The result stays on your device, and the requests do not pass through a Meows backend.",
+    "third_tools": "User-triggered network tools: DNS, WHOIS, and TLS contact the resolver or endpoint needed for a query only when you run it. URLs open in another app. None of these actions passes through a Meows service.",
+    "third_geoip": "Offline IP database: an IPInfo Lite database bundled inside the app provides IP geolocation. Lookups happen on your device. Nothing is sent to any geolocation service.",
+    "not_h": "What Meows Does Not Do",
+    "not_1": "Meows does not sell, rent, or trade your information.",
+    "not_3": "Meows does not collect analytics, usage statistics, or device identifiers.",
+    "not_4": "Meows does not show advertisements.",
     "perm_h": "Permissions",
-    "perm_p1": "Meows requests a single runtime permission (notifications), and only so it can alert you. You can deny it and keep using the app; you simply will not receive notification alerts.",
+    "perm_p1": "Meows asks only for notification permission. You can deny it and keep using the rest of the app, but Meows will not be able to send alerts.",
     "perm_p2": "You can also turn on an optional privacy mode that hides Meows from the recent-apps screen and blocks screenshots and screen recording.",
     "rights_h": "Your Choices",
     "rights_1": "Review, restore, or delete an optional Google Drive backup from Meows.",
-    "rights_2": "Delete local app data by removing servers or uninstalling Meows.",
-    "rights_3": "Turn features such as notifications or backup on or off at any time.",
+    "rights_2": "Remove a server to delete its settings and history. Uninstall Meows to delete all local app data.",
+    "rights_3": "Choose whether to allow notifications, use Cloud Backup, enable Persistent Notification, or turn on Privacy Mode. Signing out removes the saved Google account details from this device.",
     "rights_4": "Choose which servers are monitored.",
     "retention_h": "Data Retention",
     "retention_1": "Server configurations are kept until you delete them.",
     "retention_2": "Monitoring history is kept only briefly, then cleaned automatically.",
     "retention_3": "Uninstalling Meows removes its local app data. Optional Google Drive backups are separate and are not deleted automatically.",
     "children_h": "Children's Privacy",
-    "children_p": "Meows is not intended for children under 13, and I do not knowingly collect information from children.",
+    "children_p": "Meows is not intended for children under 13 and does not knowingly collect information from children.",
     "changes_h": "Changes to This Policy",
-    "changes_p": "I may update this policy from time to time. Any change will be reflected in the “Last updated” date above.",
+    "changes_p": "If this policy changes, the \"Last updated\" date above will change with it.",
     "contact_h": "Contact",
-    "contact_p": "If you have any questions about this policy, please get in touch:",
+    "contact_p": "For questions about this policy:",
     "contact_label": "Email:",
     "contact_reveal": "Reveal email",
     "meta_title": "Privacy Policy — Meows",
-    "meta_description": "How Meows stores SSH credentials, monitoring data, and optional encrypted Google Drive backups.",
+    "meta_description": "How Meows handles SSH credentials, monitoring data, optional backups, and user-triggered network tools.",
     "third_drive_link": "Google Privacy Policy"
   },
   "zhCN": {
     "back": "Meows",
+    "brand_home": "Meows 首页",
+    "skip": "跳到正文",
+    "language_auto": "跟随浏览器",
+    "language_label": "语言",
     "h1": "隐私政策",
-    "updated": "最后更新：2026 年 8 月 20 日",
-    "intro": "Meows 是一款通过 SSH 直连服务器的原生 Android App。服务器设置、凭据和监控历史保存在你的设备上。开启 Google Drive 备份后，备份会先在设备端加密，再上传到 Google Drive 的应用私有空间。",
+    "updated": "最后更新：2026 年 8 月 28 日",
+    "intro": "Meows 是一款原生 Android App，会从你的设备向你配置的服务器或跳板机建立 SSH 连接。服务器设置、凭据和监控历史保存在你的设备上。当前格式的备份会先在设备端加密，再上传到 Google Drive 中 Meows 专用的隐藏应用数据目录。",
     "collect_h": "存储的信息",
-    "collect_p": "以下内容全部仅保存在你的设备本地：",
+    "collect_p": "Meows 会在你的设备上保存以下内容：",
     "collect_1": "服务器连接信息：SSH 主机、端口、用户名，以及你的密码或私钥（已加密）。",
     "collect_2": "监控数据：从你添加的服务器读取的性能指标（CPU、内存、磁盘、网络、TCP 连接）。",
     "collect_3": "你的设置：你配置的告警阈值、通知偏好和应用选项。",
+    "collect_4": "云端备份使用的 Google 账号信息：账号 ID、邮箱，以及 Google 提供时的显示名称和头像 URL。这些信息保存在设备上，退出登录时删除。",
     "use_h": "数据如何使用",
-    "use_1": "用于向你添加的服务器建立 SSH 连接。",
+    "use_1": "用于向你配置的服务器或跳板机建立 SSH 连接。",
     "use_2": "用于展示实时状态和历史曲线。",
     "use_3": "在指标越过阈值或服务器掉线时发出通知。这一过程完全在你的设备上完成，没有任何推送服务器。",
-    "use_4": "在你登录并主动开启后，用于在 Google Drive 应用私有空间创建或恢复可选的加密备份。",
+    "use_4": "在你登录并主动使用后，用于在 Google Drive 中 Meows 专用的隐藏应用数据目录创建可选加密备份，或恢复 Meows 列出的备份。",
     "use_5": "使用离线数据库显示服务器 IP 的地理位置。",
+    "use_6": "只在你主动操作时查询 DNS、WHOIS 或 TLS，或者打开外部 URL。",
+    "use_7": "用于从被监控服务器检查卡片中所列服务是否可用。检测会在监控成功后开始。",
     "security_h": "存储与安全",
-    "security_1": "密码和私钥使用 AES-GCM 加密，密钥保存在 Android Keystore 中；可选的主密码再加一层保护。",
-    "security_2": "服务器设置和监控数据保存在本地；可选备份会先在设备端加密，再上传。",
-    "security_3": "监控数据只在设备上短期滚动保留，随后自动清除。",
-    "security_4": "任何监控数据都不会发送到外部服务器。",
-    "security_5": "SSH 连接由你的设备直接连到你的服务器。",
+    "security_1": "密码和私钥使用 AES-GCM 加密，密钥保存在 Android Keystore 中。备份主密码只用于保护备份文件。",
+    "security_2": "监控历史只保存在设备上，不会进入备份。可选备份包含服务器和跳板机的设置与凭据、隧道、告警阈值、全局刷新间隔、主题、语言、隐私模式、常驻通知设置、终端字体与字号，以及卡片徽章显示设置。上传前会先在设备端加密。",
+    "security_4": "监控数据不会发送给 Meows 服务或其他第三方。",
+    "security_5": "SSH 连接从你的设备发起，只会连到你配置的服务器或跳板机。",
     "third_h": "第三方服务",
-    "third_p": "Meows 没有自己的后端。运行时会涉及第三方的只有一项可选联网功能，以及一份内置数据库：",
-    "third_drive": "Google Drive API：用于可选的备份、恢复和删除，仅在你登录并授权后使用。备份先在设备端加密，再存入 Google Drive 的应用私有空间，相关操作从 Meows 内完成。",
+    "third_p": "Meows 没有自己的后台。只有以下功能会使用外部服务或内置数据：",
+    "third_drive": "Google Drive API：用于可选备份、恢复和删除，仅在你登录并授权后使用。Meows 会在设备上保存所选 Google 账号的信息，直到你退出登录。新备份先在设备端加密，再存入 Google Drive 的隐藏应用数据目录，因此不会出现在普通 Drive 文件列表中。猫咪名称和短码只是 Meows 内使用的显示名称。截至 v1.0.159，Meows 还可以列出、恢复或删除早期在普通 Drive 文件区的 Meows Backups 文件夹中创建的备份。",
+    "third_unlock": "监控成功后，Meows 可能会从该服务器检查卡片中所列的服务。结果保存在你的设备上，请求不经过 Meows 后端。",
+    "third_tools": "用户主动使用的网络工具：DNS、WHOIS 和 TLS 只会在你发起查询时连接所需的解析器或目标。URL 会交给其他 App 打开。这些操作都不经过 Meows 服务。",
     "third_geoip": "离线 IP 数据库：应用内置一份 IPInfo Lite 数据库用于 IP 地理位置查询。查询在你的设备上完成，不会向任何地理位置服务发送数据。",
-    "not_h": "我不会做的事",
-    "not_1": "我不出售、出租或交易你的信息。",
-    "not_2": "我不与任何人分享你的凭据或监控数据。",
-    "not_3": "我不收集分析数据、使用统计或任何设备标识符。",
-    "not_4": "我不展示广告。",
+    "not_h": "Meows 不会做什么",
+    "not_1": "Meows 不会出售、出租或交易你的信息。",
+    "not_3": "Meows 不会收集分析数据、使用统计或设备标识符。",
+    "not_4": "Meows 不会展示广告。",
     "perm_h": "权限",
-    "perm_p1": "Meows 只申请一个运行时权限（通知），而且仅用于向你发出提醒。你可以拒绝它并继续使用应用，只是收不到通知提醒而已。",
+    "perm_p1": "Meows 只申请通知权限。拒绝后仍可使用其他功能，但 Meows 无法发送提醒。",
     "perm_p2": "你还可以开启可选的隐私模式，把 Meows 从最近任务列表中隐藏，并阻止截屏和录屏。",
     "rights_h": "你的选择",
     "rights_1": "在 Meows 内查看、恢复或删除可选的 Google Drive 备份。",
-    "rights_2": "删除服务器或卸载 Meows，可以清除设备上的本地数据。",
-    "rights_3": "随时开启或关闭通知、备份等功能。",
+    "rights_2": "删除服务器会清除它的设置和历史记录。卸载 Meows 会删除全部本地 App 数据。",
+    "rights_3": "自行选择是否允许通知、使用云端备份、开启常驻通知或开启隐私模式。退出登录会从本设备删除已保存的 Google 账号信息。",
     "rights_4": "自行决定监控哪些服务器。",
     "retention_h": "数据保留",
     "retention_1": "服务器配置会一直保留，直到你手动删除。",
     "retention_2": "监控历史仅短期保留，随后自动清理。",
-    "retention_3": "卸载 Meows 会删除本地 App 数据；可选的 Google Drive 备份是独立存储的，不会随卸载自动删除。",
+    "retention_3": "卸载 Meows 会删除本地 App 数据。可选的 Google Drive 备份是独立存储的，不会随卸载自动删除。",
     "children_h": "儿童隐私",
-    "children_p": "Meows 不面向 13 岁以下的儿童，我也不会故意收集儿童的信息。",
+    "children_p": "Meows 不面向 13 岁以下儿童，也不会故意收集儿童信息。",
     "changes_h": "本政策的变更",
-    "changes_p": "我可能会不时更新本政策。任何变更都会反映在上方的“最后更新”日期中。",
-    "contact_h": "联系我",
-    "contact_p": "如果你对本政策有任何疑问，欢迎联系：",
+    "changes_p": "本政策如有变更，上方的更新日期会同步调整。",
+    "contact_h": "联系",
+    "contact_p": "如对本政策有疑问，可以发送邮件：",
     "contact_label": "邮箱：",
     "contact_reveal": "点击查看邮箱",
     "meta_title": "隐私政策 — Meows",
-    "meta_description": "Meows 如何存储 SSH 凭据、监控数据，以及可选的 Google Drive 加密备份。",
+    "meta_description": "Meows 如何处理 SSH 凭据、监控数据、可选备份，以及只在用户操作时联网的工具。",
     "third_drive_link": "Google 隐私政策"
   },
   "zhTW": {
     "back": "Meows",
+    "brand_home": "Meows 首頁",
+    "skip": "跳到正文",
+    "language_auto": "跟隨瀏覽器",
+    "language_label": "語言",
     "h1": "隱私權政策",
-    "updated": "最後更新：2026 年 8 月 20 日",
-    "intro": "Meows 是一款透過 SSH 直接連線伺服器的原生 Android App。伺服器設定、憑證和監控歷史保存在你的裝置上。開啟 Google Drive 備份後，備份會先在裝置端加密，再上傳到 Google Drive 的應用程式私人空間。",
+    "updated": "最後更新：2026 年 8 月 28 日",
+    "intro": "Meows 是一款原生 Android App，會從你的裝置向你設定的伺服器或跳板機建立 SSH 連線。伺服器設定、認證資料和監控歷史保存在你的裝置上。目前格式的備份會先在裝置端加密，再上傳到 Google Drive 中 Meows 專用的隱藏應用程式資料夾。",
     "collect_h": "儲存的資訊",
-    "collect_p": "以下內容全部僅保存在你的裝置本機：",
+    "collect_p": "Meows 會在你的裝置上儲存以下資訊：",
     "collect_1": "伺服器連線資訊：SSH 主機、連接埠、使用者名稱，以及你的密碼或私鑰（已加密）。",
     "collect_2": "監控資料：從你新增的伺服器讀取的效能指標（CPU、記憶體、磁碟、網路、TCP 連線）。",
     "collect_3": "你的設定：你設定的告警閾值、通知偏好和應用程式選項。",
+    "collect_4": "雲端備份使用的 Google 帳號資訊：帳號 ID、電子郵件，以及 Google 提供時的顯示名稱和個人資料圖片 URL。這些資訊保存在裝置上，登出時刪除。",
     "use_h": "資料如何使用",
-    "use_1": "用於向你新增的伺服器建立 SSH 連線。",
+    "use_1": "用於向你設定的伺服器或跳板機建立 SSH 連線。",
     "use_2": "用於顯示即時狀態和歷史圖表。",
     "use_3": "在指標超過閾值或伺服器離線時發出通知。這一過程完全在你的裝置上完成，沒有任何推播伺服器。",
-    "use_4": "在你登入並主動開啟後，用於在 Google Drive 應用程式私人空間建立或還原可選的加密備份。",
+    "use_4": "在你登入並主動使用後，用於在 Google Drive 中 Meows 專用的隱藏應用程式資料夾建立可選加密備份，或還原 Meows 清單中的備份。",
     "use_5": "使用離線資料庫顯示伺服器 IP 的地理位置。",
+    "use_6": "只在你主動操作時查詢 DNS、WHOIS 或 TLS，或開啟外部 URL。",
+    "use_7": "用於從受監控伺服器檢查卡片中所列服務是否可用。檢測會在監控成功後開始。",
     "security_h": "儲存與安全",
-    "security_1": "密碼和私鑰使用 AES-GCM 加密，金鑰保存在 Android Keystore 中；可選的主密碼再加一層保護。",
-    "security_2": "伺服器設定和監控資料保存在本機；可選備份會先在裝置端加密，再上傳。",
-    "security_3": "監控資料只在裝置上短期滾動保留，隨後自動清除。",
-    "security_4": "任何監控資料都不會傳送到外部伺服器。",
-    "security_5": "SSH 連線由你的裝置直接連到你的伺服器。",
+    "security_1": "密碼和私鑰使用 AES-GCM 加密，金鑰保存在 Android Keystore 中。備份主密碼只用於保護備份檔案。",
+    "security_2": "監控歷史只保存在裝置上，不會放入備份。可選備份包含伺服器和跳板機的設定與認證資料、隧道、告警門檻、全域重新整理間隔、主題、語言、隱私模式、常駐通知設定、終端機字型與字級，以及卡片徽章顯示設定。上傳前會先在裝置端加密。",
+    "security_4": "監控資料不會傳送給 Meows 服務或其他第三方。",
+    "security_5": "SSH 連線從你的裝置發起，只會連到你設定的伺服器或跳板機。",
     "third_h": "第三方服務",
-    "third_p": "Meows 沒有自己的後端。執行時會涉及第三方的只有一項可選連網功能，以及一份內建資料庫：",
-    "third_drive": "Google Drive API：用於可選的備份、還原和刪除，僅在你登入並授權後使用。備份先在裝置端加密，再存入 Google Drive 的應用程式私人空間，相關操作從 Meows 內完成。",
+    "third_p": "Meows 沒有自己的後端。只有以下功能會使用外部服務或內建資料：",
+    "third_drive": "Google Drive API：用於可選備份、還原和刪除，僅在你登入並授權後使用。Meows 會在裝置上儲存所選 Google 帳號的資訊，直到你登出。新備份會先在裝置端加密，再存入 Google Drive 的隱藏應用程式資料夾，因此不會出現在一般 Drive 檔案清單中。貓咪名稱和短碼只是 Meows 內使用的顯示名稱。截至 v1.0.159，Meows 還可以列出、還原或刪除早期在一般 Drive 檔案區的 Meows Backups 資料夾中建立的備份。",
+    "third_unlock": "監控成功後，Meows 可能會從該伺服器檢查卡片中列出的服務。結果保存在你的裝置上，請求不經過 Meows 後端。",
+    "third_tools": "使用者主動使用的網路工具：DNS、WHOIS 和 TLS 只會在你開始查詢時連線到所需的解析器或目標。URL 會交給其他 App 開啟。這些操作都不經過 Meows 服務。",
     "third_geoip": "離線 IP 資料庫：應用程式內建一份 IPInfo Lite 資料庫用於 IP 地理位置查詢。查詢在你的裝置上完成，不會向任何地理位置服務傳送資料。",
-    "not_h": "我不會做的事",
-    "not_1": "我不出售、出租或交易你的資訊。",
-    "not_2": "我不與任何人分享你的憑證或監控資料。",
-    "not_3": "我不收集分析資料、使用統計或任何裝置識別碼。",
-    "not_4": "我不顯示廣告。",
+    "not_h": "Meows 不會做什麼",
+    "not_1": "Meows 不會出售、出租或交易你的資訊。",
+    "not_3": "Meows 不會收集分析資料、使用統計或裝置識別碼。",
+    "not_4": "Meows 不會顯示廣告。",
     "perm_h": "權限",
-    "perm_p1": "Meows 只申請一個執行階段權限（通知），而且僅用於向你發出提醒。你可以拒絕它並繼續使用應用程式，只是收不到通知提醒而已。",
-    "perm_p2": "你還可以開啟可選的隱私模式，把 Meows 從最近工作列表中隱藏，並阻止截圖和螢幕錄製。",
+    "perm_p1": "Meows 只會要求通知權限。拒絕後仍可使用其他功能，但 Meows 無法傳送提醒。",
+    "perm_p2": "你也可以開啟隱私模式，讓 Meows 不出現在最近使用的應用程式畫面，並阻止截圖和螢幕錄製。",
     "rights_h": "你的選擇",
     "rights_1": "在 Meows 內查看、還原或刪除可選的 Google Drive 備份。",
-    "rights_2": "刪除伺服器或解除安裝 Meows，可以清除裝置上的本機資料。",
-    "rights_3": "隨時開啟或關閉通知、備份等功能。",
+    "rights_2": "刪除伺服器會清除它的設定和歷史記錄。解除安裝 Meows 會刪除所有本機 App 資料。",
+    "rights_3": "自行選擇是否允許通知、使用雲端備份、開啟常駐通知或開啟隱私模式。登出會從本裝置刪除已儲存的 Google 帳號資訊。",
     "rights_4": "自行決定監控哪些伺服器。",
     "retention_h": "資料保留",
     "retention_1": "伺服器設定會一直保留，直到你手動刪除。",
     "retention_2": "監控歷史僅短期保留，隨後自動清理。",
-    "retention_3": "解除安裝 Meows 會刪除本機 App 資料；可選的 Google Drive 備份是分開儲存的，不會隨解除安裝自動刪除。",
+    "retention_3": "解除安裝 Meows 會刪除本機 App 資料。可選的 Google Drive 備份是分開儲存的，不會隨解除安裝自動刪除。",
     "children_h": "兒童隱私",
-    "children_p": "Meows 不面向 13 歲以下的兒童，我也不會刻意收集兒童的資訊。",
+    "children_p": "Meows 不面向 13 歲以下兒童，也不會故意收集兒童資訊。",
     "changes_h": "本政策的變更",
-    "changes_p": "我可能會不時更新本政策。任何變更都會反映在上方的“最後更新”日期中。",
-    "contact_h": "聯絡我",
-    "contact_p": "如果你對本政策有任何疑問，歡迎聯絡：",
+    "changes_p": "本政策如有變更，上方的更新日期會同步調整。",
+    "contact_h": "聯絡",
+    "contact_p": "如對本政策有疑問，可以傳送電子郵件：",
     "contact_label": "電子郵件：",
-    "contact_reveal": "點擊查看郵箱",
+    "contact_reveal": "查看電子郵件",
     "meta_title": "隱私權政策 — Meows",
-    "meta_description": "Meows 如何儲存 SSH 憑證、監控資料，以及可選的 Google Drive 加密備份。",
+    "meta_description": "Meows 如何處理 SSH 認證資料、監控資料、可選備份，以及只在使用者操作時連線的工具。",
     "third_drive_link": "Google 隱私權政策"
   },
   "ja": {
     "back": "Meows",
+    "brand_home": "Meows ホーム",
+    "skip": "本文へ移動",
+    "language_auto": "ブラウザーに合わせる",
+    "language_label": "言語",
     "h1": "プライバシーポリシー",
-    "updated": "最終更新：2026年8月20日",
-    "intro": "Meows は SSH でサーバーへ直接接続するネイティブ Android アプリです。サーバー設定、認証情報、監視履歴は端末内に保存されます。Google Drive バックアップを有効にした場合、バックアップは端末上で暗号化されてから Google Drive のアプリ専用領域へアップロードされます。",
+    "updated": "最終更新：2026年8月28日",
+    "intro": "Meows は、端末から設定済みのサーバーまたは踏み台ホストへ SSH 接続するネイティブ Android アプリです。サーバー設定、認証情報、監視履歴は端末内に保存されます。現在の形式で作成したバックアップは、端末上で暗号化してから Google Drive の Meows 専用アプリデータフォルダへアップロードします。",
     "collect_h": "保存する情報",
-    "collect_p": "以下はすべて端末内にのみ保存されます。",
+    "collect_p": "Meows は次の情報を端末内に保存します。",
     "collect_1": "サーバー接続情報：SSH ホスト、ポート、ユーザー名、パスワードまたは秘密鍵（暗号化済み）。",
     "collect_2": "監視データ：追加したサーバーから読み取る性能指標（CPU、メモリ、ディスク、ネットワーク、TCP 接続）。",
-    "collect_3": "設定：設定したアラートのしきい値、通知の設定、アプリのオプション。",
+    "collect_3": "アプリの設定：アラートのしきい値、通知設定、その他のオプション。",
+    "collect_4": "クラウドバックアップで使う Google アカウント情報：アカウント ID、メールアドレス、および Google から提供された場合の表示名とプロフィール画像 URL。端末内に保存し、サインアウト時に削除します。",
     "use_h": "データの利用方法",
-    "use_1": "追加したサーバーへ SSH 接続を確立するため。",
+    "use_1": "設定したサーバーまたは踏み台ホストへ SSH 接続するため。",
     "use_2": "リアルタイムの状態と履歴グラフを表示するため。",
     "use_3": "しきい値を超えたときやサーバーがオフラインになったときに通知するため。これはすべて端末内で処理され、プッシュサーバーは存在しません。",
-    "use_4": "ログインして利用を選んだ場合に、Google Drive のアプリ専用領域へ任意の暗号化バックアップを作成または復元するため。",
+    "use_4": "ログインして利用を選んだ場合に、Google Drive の Meows 専用アプリデータフォルダへ任意の暗号化バックアップを作成するか、Meows の一覧にあるバックアップを復元するため。",
     "use_5": "オフラインデータベースを用いてサーバー IP の地理的位置を表示するため。",
+    "use_6": "ユーザーが操作したときだけ、DNS、WHOIS、TLS の照会や外部 URL の表示を行うため。",
+    "use_7": "監視対象サーバーから、カードに表示するサービスが利用可能か確認するため。確認は監視に成功した後に開始します。",
     "security_h": "保存とセキュリティ",
-    "security_1": "パスワードと秘密鍵は、Android Keystore 内の鍵を用いて AES-GCM で暗号化されます。任意のマスターパスワードでもう一層加えられます。",
-    "security_2": "サーバー設定と監視データは端末内に保存されます。任意のバックアップは端末上で暗号化してからアップロードします。",
-    "security_3": "監視データは端末内に短いローリングウィンドウの間だけ保持され、その後自動的に削除されます。",
-    "security_4": "監視データが外部サーバーに送信されることはありません。",
-    "security_5": "SSH 接続は端末からサーバーへ直接行われます。",
+    "security_1": "パスワードと秘密鍵は、Android Keystore 内の鍵を用いて AES-GCM で暗号化されます。バックアップのマスターパスワードは、バックアップファイルの保護だけに使用されます。",
+    "security_2": "監視履歴は端末内だけに保存され、バックアップには含まれません。任意で作成するバックアップには、サーバーと踏み台の設定および認証情報、トンネル、アラートのしきい値、全体の更新間隔、テーマ、言語、プライバシーモード、常駐通知の設定、ターミナルのフォントと文字サイズ、カードバッジの表示設定が含まれます。アップロード前に端末上で暗号化されます。",
+    "security_4": "監視データが Meows のサービスやその他の第三者へ送信されることはありません。",
+    "security_5": "SSH 接続は端末から開始され、設定済みのサーバーまたは踏み台ホストだけに接続します。",
     "third_h": "第三者サービス",
-    "third_p": "Meows は独自のバックエンドを持ちません。第三者に関係するのは、任意のオンライン連携一つと、アプリに同梱するデータベース一つです。",
-    "third_drive": "Google Drive API：任意のバックアップ、復元、削除に使います。サインインして同意した場合にのみ利用し、バックアップは端末上で暗号化して Google Drive のアプリ専用領域へ保存します。操作は Meows 内で行います。",
+    "third_p": "Meows 独自のバックエンドはありません。外部サービスまたは同梱データを使う機能は次のとおりです。",
+    "third_drive": "Google Drive API：任意のバックアップ、復元、削除に使います。サインインして同意した場合にのみ利用し、選択した Google アカウントの情報はサインアウトするまで端末内に保存します。新しいバックアップは端末上で暗号化して Google Drive の非表示アプリデータフォルダへ保存するため、通常の Drive ファイル一覧には表示されません。猫の名前と短いコードは Meows 内だけで使う表示名です。v1.0.159 までは、通常の Drive 領域にある Meows Backups フォルダへ以前作成したバックアップの一覧表示、復元、削除にも使います。",
+    "third_unlock": "監視に成功すると、Meows はそのサーバーから、カードに表示されているサービスへ接続できるかを確認する場合があります。結果は端末内に保存され、リクエストが Meows のバックエンドを経由することはありません。",
+    "third_tools": "ユーザーが起動するネットワークツール：DNS、WHOIS、TLS は、検索を実行したときだけ必要なリゾルバーや接続先と通信します。URL は別のアプリで開きます。いずれも Meows のサービスを経由しません。",
     "third_geoip": "オフライン IP データベース：アプリに同梱された IPInfo Lite データベースで IP の地理的位置を判定します。照会は端末内で行われ、いかなる位置情報サービスにもデータは送信されません。",
-    "not_h": "行わないこと",
-    "not_1": "あなたの情報を販売・貸与・取引することはありません。",
-    "not_2": "あなたの認証情報や監視データを誰とも共有しません。",
-    "not_3": "解析データ、利用統計、いかなる端末識別子も収集しません。",
-    "not_4": "広告を表示しません。",
+    "not_h": "Meows が行わないこと",
+    "not_1": "Meows はユーザー情報を販売、貸与、取引しません。",
+    "not_3": "Meows は解析データ、利用統計、端末識別子を収集しません。",
+    "not_4": "Meows は広告を表示しません。",
     "perm_h": "権限",
-    "perm_p1": "Meows が要求する実行時権限は通知ひとつだけで、通知のためにのみ使われます。拒否してもアプリは使い続けられます。通知が届かなくなるだけです。",
+    "perm_p1": "Meows が求める実行時権限は通知だけです。拒否してもほかの機能は使えますが、通知は届きません。",
     "perm_p2": "最近のアプリ画面から Meows を隠し、スクリーンショットと画面録画を防ぐ、任意のプライバシーモードもオンにできます。",
     "rights_h": "あなたの選択",
     "rights_1": "Meows 内で任意の Google Drive バックアップを確認、復元、削除できます。",
-    "rights_2": "サーバー設定を削除するか Meows をアンインストールすると、端末内のローカルデータを削除できます。",
-    "rights_3": "通知やバックアップなどの機能をいつでもオン・オフできます。",
+    "rights_2": "サーバーを削除すると、その設定と履歴が消去されます。Meows をアンインストールすると、ローカルのアプリデータがすべて削除されます。",
+    "rights_3": "通知を許可するか、クラウドバックアップを使うか、常駐通知やプライバシーモードを有効にするかを選べます。サインアウトすると、保存済みの Google アカウント情報が端末から削除されます。",
     "rights_4": "どのサーバーを監視するかを選べます。",
     "retention_h": "データの保持",
     "retention_1": "サーバー設定は、削除するまで保持されます。",
     "retention_2": "監視履歴は短期間だけ保持され、その後自動的に消去されます。",
     "retention_3": "Meows をアンインストールするとローカルのアプリデータは削除されます。任意の Google Drive バックアップは別に保存され、自動では削除されません。",
     "children_h": "子どものプライバシー",
-    "children_p": "Meows は13歳未満の子ども向けではなく、子どもの情報を意図的に収集することはありません。",
+    "children_p": "Meows は 13 歳未満の子ども向けではなく、子どもの情報を意図的に収集しません。",
     "changes_h": "本ポリシーの変更",
-    "changes_p": "本ポリシーは随時更新することがあります。変更は上記の「最終更新」日付に反映されます。",
+    "changes_p": "本ポリシーを変更した場合は、上記の\"最終更新\"日も更新します。",
     "contact_h": "お問い合わせ",
-    "contact_p": "本ポリシーについてご不明な点があれば、ご連絡ください。",
+    "contact_p": "本ポリシーに関するお問い合わせ：",
     "contact_label": "メール：",
     "contact_reveal": "メールを表示",
     "meta_title": "プライバシーポリシー — Meows",
-    "meta_description": "Meows における SSH 認証情報、監視データ、任意の Google Drive 暗号化バックアップの扱い。",
+    "meta_description": "Meows における SSH 認証情報、監視データ、任意のバックアップ、ユーザーが開始するネットワークツールの扱い。",
     "third_drive_link": "Google プライバシーポリシー"
   },
   "ko": {
     "back": "Meows",
+    "brand_home": "Meows 홈",
+    "skip": "본문으로 이동",
+    "language_auto": "브라우저 언어 따르기",
+    "language_label": "언어",
     "h1": "개인정보 처리방침",
-    "updated": "최종 업데이트: 2026년 8월 20일",
-    "intro": "Meows는 SSH로 서버에 직접 연결하는 네이티브 Android 앱입니다. 서버 설정, 자격 증명, 모니터링 기록은 기기에 저장됩니다. Google Drive 백업을 켜면 백업은 기기에서 암호화된 뒤 Google Drive 앱 전용 공간에 업로드됩니다.",
+    "updated": "최종 업데이트: 2026년 8월 28일",
+    "intro": "Meows는 기기에서 사용자가 설정한 서버 또는 점프 호스트로 SSH 연결을 여는 네이티브 Android 앱입니다. 서버 설정, 자격 증명, 모니터링 기록은 기기에 저장됩니다. 현재 형식으로 만든 백업은 기기에서 암호화한 뒤 Google Drive의 Meows 전용 앱 데이터 폴더에 업로드합니다.",
     "collect_h": "저장하는 정보",
-    "collect_p": "아래 항목은 모두 기기에만 로컬로 보관됩니다.",
+    "collect_p": "Meows는 다음 정보를 기기에 저장합니다.",
     "collect_1": "서버 연결 정보: SSH 호스트, 포트, 사용자 이름, 그리고 비밀번호 또는 개인 키(암호화됨).",
     "collect_2": "모니터링 데이터: 추가한 서버에서 읽어온 성능 지표(CPU, 메모리, 디스크, 네트워크, TCP 연결).",
     "collect_3": "설정: 직접 구성한 알림 임계값, 알림 환경설정, 앱 옵션.",
+    "collect_4": "클라우드 백업에 사용하는 Google 계정 정보: 계정 ID, 이메일 주소, 그리고 Google에서 제공하는 경우 표시 이름과 프로필 이미지 URL. 이 정보는 로그아웃할 때까지 기기에 저장됩니다.",
     "use_h": "데이터 사용 방식",
-    "use_1": "추가한 서버에 SSH 연결을 맺기 위해.",
+    "use_1": "설정한 서버 또는 점프 호스트에 SSH로 연결하기 위해.",
     "use_2": "실시간 상태와 기록 차트를 표시하기 위해.",
     "use_3": "임계값을 넘거나 서버가 오프라인이 될 때 알림을 보내기 위해. 이 과정은 전적으로 기기 안에서 처리되며 푸시 서버는 없습니다.",
-    "use_4": "로그인하고 사용을 선택한 경우 Google Drive 앱 전용 공간에 선택적 암호화 백업을 만들거나 복원하기 위해.",
+    "use_4": "로그인하고 사용을 선택한 경우 Google Drive의 Meows 전용 앱 데이터 폴더에 선택적 암호화 백업을 만들거나 Meows 목록에 표시된 백업을 복원하기 위해.",
     "use_5": "오프라인 데이터베이스로 서버 IP의 지리적 위치를 표시하기 위해.",
+    "use_6": "사용자가 직접 실행할 때만 DNS, WHOIS, TLS를 조회하거나 외부 URL을 열기 위해.",
+    "use_7": "모니터링하는 서버에서 카드에 표시할 서비스의 사용 가능 여부를 확인하기 위해. 확인은 모니터링에 성공한 뒤 시작됩니다.",
     "security_h": "저장 및 보안",
-    "security_1": "비밀번호와 개인 키는 Android Keystore에 보관된 키로 AES-GCM 암호화됩니다. 선택적 마스터 비밀번호가 한 겹을 더합니다.",
-    "security_2": "서버 설정과 모니터링 데이터는 기기에 저장됩니다. 선택적 백업은 기기에서 암호화한 뒤 업로드합니다.",
-    "security_3": "모니터링 데이터는 기기에서 짧은 롤링 윈도우 동안만 보관된 뒤 자동으로 삭제됩니다.",
-    "security_4": "어떤 모니터링 데이터도 외부 서버로 전송되지 않습니다.",
-    "security_5": "SSH 연결은 기기에서 서버로 직접 이루어집니다.",
+    "security_1": "비밀번호와 개인 키는 Android Keystore에 보관된 키로 AES-GCM 암호화됩니다. 백업 마스터 비밀번호는 백업 파일을 보호하는 데만 사용됩니다.",
+    "security_2": "모니터링 기록은 기기에만 저장되며 백업에 포함되지 않습니다. 선택적 백업에는 서버와 점프 호스트의 설정 및 자격 증명, 터널, 알림 임계값, 전체 새로고침 간격, 테마, 언어, 개인정보 보호 모드, 상주 알림 설정, 터미널 글꼴과 크기, 카드 배지 표시 설정이 포함됩니다. 업로드 전에 기기에서 암호화됩니다.",
+    "security_4": "모니터링 데이터는 Meows 서비스나 다른 제3자에게 전송되지 않습니다.",
+    "security_5": "SSH 연결은 기기에서 시작되며 사용자가 설정한 서버 또는 점프 호스트로만 연결됩니다.",
     "third_h": "제3자 서비스",
-    "third_p": "Meows에는 자체 백엔드가 없습니다. 제3자와 관련된 것은 선택적 온라인 연동 하나와 앱에 포함된 데이터베이스 하나입니다.",
-    "third_drive": "Google Drive API: 선택적 백업, 복원, 삭제에 사용합니다. 로그인하고 동의한 경우에만 사용하며, 백업은 기기에서 암호화한 뒤 Google Drive 앱 전용 공간에 저장합니다. 관련 작업은 Meows 안에서 합니다.",
+    "third_p": "Meows에는 자체 백엔드가 없습니다. 외부 서비스 또는 내장 데이터를 사용하는 기능은 다음과 같습니다.",
+    "third_drive": "Google Drive API: 선택적 백업, 복원, 삭제에 사용합니다. 로그인하고 동의한 경우에만 사용하며, 선택한 Google 계정 정보는 로그아웃할 때까지 기기에 저장합니다. 새 백업은 기기에서 암호화한 뒤 Google Drive의 숨겨진 앱 데이터 폴더에 저장하므로 일반 Drive 파일 목록에는 표시되지 않습니다. 고양이 이름과 짧은 코드는 Meows 안에서만 사용하는 표시 이름입니다. v1.0.159까지는 일반 Drive 영역의 Meows Backups 폴더에 예전에 만든 백업을 목록에 표시하거나 복원, 삭제하는 데도 사용합니다.",
+    "third_unlock": "모니터링에 성공하면 Meows가 해당 서버에서 카드에 표시된 서비스의 접속 가능 여부를 확인할 수 있습니다. 결과는 기기에 저장되며 요청은 Meows 백엔드를 거치지 않습니다.",
+    "third_tools": "사용자가 실행하는 네트워크 도구: DNS, WHOIS, TLS는 조회할 때만 필요한 리졸버나 대상에 연결합니다. URL은 다른 앱에서 엽니다. 어떤 작업도 Meows 서비스를 거치지 않습니다.",
     "third_geoip": "오프라인 IP 데이터베이스: 앱에 포함된 IPInfo Lite 데이터베이스로 IP 지리 위치를 조회합니다. 조회는 기기 안에서 이루어지며, 어떤 위치 서비스로도 데이터를 보내지 않습니다.",
-    "not_h": "하지 않는 것",
-    "not_1": "귀하의 정보를 판매, 대여 또는 거래하지 않습니다.",
-    "not_2": "귀하의 자격 증명이나 모니터링 데이터를 누구와도 공유하지 않습니다.",
-    "not_3": "분석 데이터, 사용 통계, 어떤 기기 식별자도 수집하지 않습니다.",
-    "not_4": "광고를 표시하지 않습니다.",
+    "not_h": "Meows가 하지 않는 일",
+    "not_1": "Meows는 사용자 정보를 판매, 대여 또는 거래하지 않습니다.",
+    "not_3": "Meows는 분석 데이터, 사용 통계 또는 기기 식별자를 수집하지 않습니다.",
+    "not_4": "Meows는 광고를 표시하지 않습니다.",
     "perm_h": "권한",
-    "perm_p1": "Meows가 요청하는 런타임 권한은 알림 하나뿐이며, 오직 알림을 보내기 위해서만 사용됩니다. 거부해도 앱은 계속 사용할 수 있으며, 단지 알림을 받지 못할 뿐입니다.",
+    "perm_p1": "Meows가 요청하는 런타임 권한은 알림뿐입니다. 거부해도 다른 기능은 사용할 수 있지만 알림은 받을 수 없습니다.",
     "perm_p2": "최근 앱 화면에서 Meows를 숨기고 스크린샷과 화면 녹화를 차단하는 선택적 개인정보 보호 모드도 켤 수 있습니다.",
     "rights_h": "선택권",
     "rights_1": "Meows 안에서 선택적 Google Drive 백업을 확인, 복원, 삭제할 수 있습니다.",
-    "rights_2": "서버 설정을 삭제하거나 Meows를 제거하면 기기의 로컬 데이터를 지울 수 있습니다.",
-    "rights_3": "알림이나 백업 같은 기능을 언제든 켜고 끌 수 있습니다.",
+    "rights_2": "서버를 삭제하면 해당 서버의 설정과 기록이 지워집니다. Meows를 제거하면 모든 로컬 앱 데이터가 삭제됩니다.",
+    "rights_3": "알림을 허용할지, 클라우드 백업을 사용할지, 상주 알림이나 개인정보 보호 모드를 켤지 선택할 수 있습니다. 로그아웃하면 저장된 Google 계정 정보가 기기에서 삭제됩니다.",
     "rights_4": "어떤 서버를 모니터링할지 선택할 수 있습니다.",
     "retention_h": "데이터 보관",
     "retention_1": "서버 구성은 삭제하기 전까지 보관됩니다.",
     "retention_2": "모니터링 기록은 짧게만 보관된 뒤 자동으로 정리됩니다.",
     "retention_3": "Meows를 제거하면 로컬 앱 데이터는 삭제됩니다. 선택적 Google Drive 백업은 별도로 저장되며 자동으로 삭제되지 않습니다.",
     "children_h": "아동 개인정보",
-    "children_p": "Meows는 13세 미만 아동을 대상으로 하지 않으며, 아동의 정보를 고의로 수집하지 않습니다.",
+    "children_p": "Meows는 13세 미만 아동을 대상으로 하지 않으며 아동의 정보를 의도적으로 수집하지 않습니다.",
     "changes_h": "방침 변경",
-    "changes_p": "이 방침은 수시로 업데이트될 수 있습니다. 모든 변경 사항은 위의 “최종 업데이트” 날짜에 반영됩니다.",
+    "changes_p": "이 방침이 변경되면 위의 최종 업데이트 날짜도 함께 바뀝니다.",
     "contact_h": "문의",
-    "contact_p": "이 방침에 대해 궁금한 점이 있으면 연락해 주세요.",
+    "contact_p": "이 방침에 관한 문의:",
     "contact_label": "이메일:",
     "contact_reveal": "이메일 보기",
     "meta_title": "개인정보 처리방침 — Meows",
-    "meta_description": "Meows의 SSH 자격 증명, 모니터링 데이터, 선택적 Google Drive 암호화 백업 처리 방식.",
+    "meta_description": "Meows의 SSH 자격 증명, 모니터링 데이터, 선택적 백업, 사용자가 실행하는 네트워크 도구 처리 방식.",
     "third_drive_link": "Google 개인정보 처리방침"
   }
 });
 
   applyI18n(I18N);
-
-  // 邮箱：base64 编码防爬，点击解码
-  const emailLink = document.getElementById("email-link");
-  const email = atob(emailLink.dataset.email);
-  emailLink.addEventListener("click", function (e) {
-    e.preventDefault();
-    emailLink.href = "mailto:" + email;
-    emailLink.textContent = email;
-  }, { once: true });
 </script>
 </body>
 </html>
