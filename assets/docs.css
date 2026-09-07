@@ -12,7 +12,7 @@
   grid-template-columns: 220px minmax(0, 780px);
   justify-content: center;
   gap: clamp(48px, 7vw, 96px);
-  padding-block: 64px 120px;
+  padding-bottom: 120px;
 }
 
 .docs-sidebar {
@@ -60,37 +60,14 @@
   min-width: 0;
 }
 
-.docs-intro {
-  padding: 16px 0 54px;
-}
-
-.docs-intro .kicker {
-  margin-bottom: 16px;
-  color: var(--rust-dark);
-  font-size: .8rem;
-  font-weight: 780;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-
-.docs-intro h1 {
-  max-width: 760px;
-  margin: 0;
-  font-size: clamp(2.45rem, 5vw, 4.35rem);
-  line-height: 1;
-  letter-spacing: -.046em;
-}
-
 .docs-lead {
   max-width: 710px;
-  margin: 28px 0 0;
   color: var(--muted);
   font-size: 1.14rem;
   line-height: 1.75;
 }
 
 .docs-version {
-  margin: 22px 0 0;
   color: var(--faint);
   font-size: .86rem;
 }
@@ -379,6 +356,10 @@
   color: var(--ink);
 }
 
+@media (min-width: 1021px) {
+  .docs-shell { --document-width: var(--shell); }
+}
+
 @media (max-width: 1020px) {
   .docs-shell {
     grid-template-columns: minmax(0, 780px);
@@ -423,15 +404,7 @@
   }
 
   .docs-shell {
-    padding-block: 42px 88px;
-  }
-
-  .docs-intro {
-    padding-top: 8px;
-  }
-
-  .docs-intro h1 {
-    font-size: clamp(2.55rem, 11vw, 4.25rem);
+    padding-bottom: 88px;
   }
 
   .docs-section {
@@ -440,18 +413,6 @@
 }
 
 @media (max-width: 560px) {
-  .docs-shell {
-    padding-top: 34px;
-  }
-
-  .docs-intro {
-    padding-bottom: 50px;
-  }
-
-  .docs-intro h1 {
-    font-size: clamp(2.4rem, 12vw, 3.45rem);
-  }
-
   .docs-lead {
     font-size: 1.04rem;
   }

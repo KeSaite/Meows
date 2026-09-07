@@ -1,0 +1,31 @@
+/* 三类文档共享标题与单列阅读宽度；使用说明在宽屏自行保留目录列 */
+.document-shell {
+  width: min(var(--document-width, 780px), calc(100% - 48px));
+  margin-inline: auto;
+  padding-top: clamp(46px, 5vw, 64px);
+}
+
+.document-intro {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.document-intro > * {
+  margin: 0;
+}
+
+.document-title {
+  max-width: 760px;
+  font-size: clamp(2.375rem, 7vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+
+@media (max-width: 820px) {
+  .document-shell {
+    width: min(var(--document-width, 780px), calc(100% - 34px));
+  }
+}

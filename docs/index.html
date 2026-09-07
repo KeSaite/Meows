@@ -18,6 +18,7 @@
   <meta property="og:url" content="https://app.kvitra.com/docs/">
   <link rel="stylesheet" href="../assets/home.css">
   <link rel="stylesheet" href="../assets/docs.css">
+  <link rel="stylesheet" href="../assets/document.css">
   <script src="../assets/language.js" defer></script>
   <script src="../assets/docs-i18n.js" defer></script>
   <script src="../assets/contact.js" defer></script>
@@ -88,7 +89,7 @@
     </div>
   </header>
 
-  <main id="main" class="docs-shell shell">
+  <main id="main" class="docs-shell document-shell">
     <aside class="docs-sidebar" aria-label="On this page" data-i18n-aria-label="toc_label">
       <p class="docs-sidebar-title" data-i18n="toc_title">Manual</p>
       <nav>
@@ -108,9 +109,8 @@
     </aside>
 
     <article class="docs-content">
-      <div class="docs-intro">
-        <p class="kicker" data-i18n="intro_kicker">Meows manual</p>
-        <h1 data-i18n="intro_title">Using Meows</h1>
+      <div class="document-intro">
+        <h1 class="document-title" data-i18n="intro_title">Using Meows</h1>
         <p class="docs-lead" data-i18n="intro_body">Start by adding a server. The sections below explain each part of Meows and where to look when something goes wrong.</p>
         <p class="docs-version" data-i18n="intro_version">Android 14 or later · English, Simplified Chinese, Traditional Chinese, Japanese, and Korean</p>
       </div>
@@ -161,7 +161,7 @@
               <tr><th data-i18n="boundary_history_h">Monitoring history</th><td data-i18n="boundary_history_b">Monitoring history stays on the device. Older entries are removed automatically.</td></tr>
               <tr><th data-i18n="boundary_tools_h">Network tools</th><td data-i18n="boundary_tools_b">DNS, WHOIS, and TLS use the network only after you start a query. Local IP database lookups stay on the device.</td></tr>
               <tr><th data-i18n="boundary_backup_h">Google Drive backup</th><td data-i18n="boundary_backup_b">This is optional. A backup is encrypted on your device before it is stored in Meows' hidden app data folder in Google Drive.</td></tr>
-              <tr><th data-i18n="boundary_permission_h">Notification permission</th><td data-i18n="boundary_permission_b">Only notification permission is requested. You can deny it and continue using the app without notification alerts.</td></tr>
+              <tr><th data-i18n="boundary_permission_h">Notification permission</th><td data-i18n="boundary_permission_b">Notifications are the only runtime permission Meows asks you to grant. You can deny it and continue using the app without notification alerts.</td></tr>
             </tbody>
           </table>
         </div>
@@ -179,6 +179,7 @@
           </table>
         </div>
         <p class="docs-note" data-i18n="launcher_shortcuts">Long-press the Meows app icon for Add Server, Status, Settings, and Terminal shortcuts.</p>
+
       </section>
 
       <section id="start" class="docs-section">
@@ -313,6 +314,9 @@
           <li><span data-i18n="shell_start_4">When the interactive session is no longer needed, tap the disconnect icon in the upper-right corner.</span></li>
         </ol>
 
+        <p data-i18n="shell_switch">Use the server selector at the top to switch terminals. Each server has its own terminal; switching keeps other sessions connected, and input goes only to the selected terminal.</p>
+        <p data-i18n="shell_close">Disconnecting ends only the selected session and keeps its output visible. Once disconnected, use the trash icon to close that terminal and discard its output. Meows then selects the most recently used remaining terminal, whether connected or disconnected. The initial screen appears only when none remain. Closing a terminal does not delete the saved server.</p>
+
         <h3 data-i18n="shell_toolbar_title">Terminal controls</h3>
         <div class="table-wrap">
           <table>
@@ -438,10 +442,13 @@
               <tr><th data-i18n="settings_app_h">App Settings</th><td data-i18n="settings_app_b">Global refresh interval, language, terminal font and size, and Persistent Notification.</td></tr>
               <tr><th data-i18n="settings_data_h">Data Management</th><td data-i18n="settings_data_b">The installed offline IP database source, date, and size, plus the size of Meows' local database.</td></tr>
               <tr><th data-i18n="settings_tools_h">Utilities</th><td data-i18n="settings_tools_b">Linux and C references, network queries, and local calculators.</td></tr>
-              <tr><th data-i18n="settings_about_h">About</th><td data-i18n="settings_about_b">Acknowledgements, open-source licenses, version information, and the contact address.</td></tr>
+              <tr><th data-i18n="settings_help_legal_h">Help &amp; Legal</th><td data-i18n="settings_help_legal_b">Online Help, Privacy Policy, Terms of Use, and Open Source Licenses.</td></tr>
+              <tr><th data-i18n="settings_about_h">About</th><td data-i18n="settings_about_b">Acknowledgements and Version Info.</td></tr>
             </tbody>
           </table>
         </div>
+
+        <p data-i18n="settings_contact">To copy the developer's contact email, open Settings → About → Version Info.</p>
 
         <h3 data-i18n="terminal_settings_title">Terminal appearance</h3>
         <p data-i18n="terminal_settings_body">The terminal can use System Monospace, Sarasa Fixed, JetBrains Mono, Cascadia Mono, or Maple Mono. Font size can be set from 6 to 20. These settings change only how the terminal looks in Meows, not settings on the server.</p>
@@ -545,6 +552,7 @@
       <nav class="docs-end-links" aria-label="Related pages" data-i18n-aria-label="related_label">
         <a href="../" data-i18n="related_home">Home</a>
         <a href="../privacy/" data-i18n="related_privacy">Privacy policy</a>
+        <a href="../terms/" data-i18n="related_terms">Terms of Use</a>
         <a href="https://github.com/KeSaite/Meows" target="_blank" rel="noopener" data-i18n="related_github">Website source on GitHub</a>
       </nav>
     </article>

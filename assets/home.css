@@ -344,6 +344,7 @@ a {
 .hero h1 {
   max-width: 12.5ch;
   font-size: clamp(3.25rem, 5.6vw, 5.4rem);
+  text-wrap: balance;
 }
 
 
@@ -351,17 +352,11 @@ html:lang(zh-Hans) .hero h1,
 html:lang(zh-Hant) .hero h1,
 html:lang(ja) .hero h1,
 html:lang(ko) .hero h1 {
-  max-width: 8.6em;
-  font-size: clamp(3rem, 5.6vw, 5.35rem);
-  line-height: 1.08;
+  max-width: 10em;
+  font-size: clamp(2.75rem, 4.5vw, 4.25rem);
+  line-height: 1.15;
   word-break: auto-phrase;
   text-wrap: balance;
-}
-
-html:lang(zh-Hans) .hero h1,
-html:lang(zh-Hant) .hero h1 {
-  white-space: pre-line;
-  text-wrap: initial;
 }
 
 .hero-lead {
@@ -984,6 +979,7 @@ footer {
 
 .footer-links {
   display: flex;
+  flex-wrap: wrap;
   gap: 18px;
 }
 
@@ -1157,7 +1153,7 @@ footer {
   html:lang(zh-Hant) .hero h1,
   html:lang(ja) .hero h1,
   html:lang(ko) .hero h1 {
-    font-size: clamp(2.65rem, 11.3vw, 3rem);
+    font-size: clamp(2.25rem, 10vw, 3rem);
   }
 
   .hero-actions {

@@ -3,14 +3,14 @@
 This repository contains the source for the official Meows website at
 [app.kvitra.com](https://app.kvitra.com/).
 
-It includes the product site, online manual, and privacy policy. The site is a
+It includes the product site, online manual, privacy policy, and terms of use. The site is a
 static GitHub Pages project with English, Simplified Chinese, Traditional Chinese,
 Japanese, and Korean content. Theme-aware screenshots follow the visitor's system
 theme.
 
 ## Language links
 
-The home page, manual, and privacy policy accept the same `lang` query values:
+The home page, manual, privacy policy, and terms of use accept the same `lang` query values:
 
 ```text
 en
